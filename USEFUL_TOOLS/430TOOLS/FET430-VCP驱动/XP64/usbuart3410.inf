@@ -1,0 +1,169 @@
+;******************************************************************************
+;*   COPYRIGHT (C) 2002-2009 TEXAS INSTRUMENTS INCORPORATED.
+;*   ALL RIGHTS RESERVED. ONLY USE WITH TEXAS INSTRUMENTS SILICON.
+;******************************************************************************
+;*
+;*   FILE:           usbuart3410.INF
+;*   SUBSYSTEM:      UMP Devices
+;*
+;*   ABSTRACT:       Texas Instruments VCP Driver Installation file for
+;*                   a UMP Device main driver.
+;*                   UMP installation file for TIUSB3410
+;*
+;*
+;******************************************************************************
+;*
+[Version]
+Signature="$WINDOWS NT$"
+Class=Ports
+ClassGuid={4d36e978-e325-11ce-bfc1-08002be10318}
+Provider=%TIInc%
+DriverVer=10/20/2009,6.5.9017.0
+CatalogFile=ump3410.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskId%
+
+[SourceDisksFiles]
+umpf3410.i51=1
+umpusbvista.sys = 1
+
+;*****************************************
+; 3410  Install Section
+;*****************************************
+
+[Manufacturer]
+%TI.Mfg%=TI.Section,NTx86, NTamd64, NTia64
+
+; For Win2K because it cannot parse decorated sections.
+[TI.Section]
+%3410.DeviceDesc%=umpusbvista, USB\VID_0451&PID_3410
+%341A.DeviceDesc%=umpusbvista, USB\VID_0451&PID_341A
+%2FA0.DeviceDesc%=umpusbvista, USB\VID_0451&PID_2FA0
+%F430.DeviceDesc%=umpusbvista, USB\VID_0451&PID_F430
+%F500.DeviceDesc%=umpusbvista, USB\VID_0451&PID_F500
+
+; For XP and later
+[TI.Section.NTx86]
+%3410.DeviceDesc%=umpusbvista, USB\VID_0451&PID_3410
+%341A.DeviceDesc%=umpusbvista, USB\VID_0451&PID_341A
+%2FA0.DeviceDesc%=umpusbvista, USB\VID_0451&PID_2FA0
+%F430.DeviceDesc%=umpusbvista, USB\VID_0451&PID_F430
+%F500.DeviceDesc%=umpusbvista, USB\VID_0451&PID_F500
+
+[TI.Section.NTamd64]
+%3410.DeviceDesc%=umpusbvista, USB\VID_0451&PID_3410
+%341A.DeviceDesc%=umpusbvista, USB\VID_0451&PID_341A
+%2FA0.DeviceDesc%=umpusbvista, USB\VID_0451&PID_2FA0
+%F430.DeviceDesc%=umpusbvista, USB\VID_0451&PID_F430
+%F500.DeviceDesc%=umpusbvista, USB\VID_0451&PID_F500
+
+[TI.Section.NTia64]
+%3410.DeviceDesc%=umpusbvista, USB\VID_0451&PID_3410
+%341A.DeviceDesc%=umpusbvista, USB\VID_0451&PID_341A
+%2FA0.DeviceDesc%=umpusbvista, USB\VID_0451&PID_2FA0
+%F430.DeviceDesc%=umpusbvista, USB\VID_0451&PID_F430
+%F500.DeviceDesc%=umpusbvista, USB\VID_0451&PID_F500
+
+; -----------------------------------------------------------------------------
+; Class Installer
+; -----------------------------------------------------------------------------
+[ClassInstall32.NT]
+AddReg=PortsClass.NT.AddReg
+
+[PortsClass.NT.AddReg]
+HKR,,,,%PortsClassName%
+HKR,,Icon,,"-23"
+HKR,,Installer32,,"MsPorts.Dll,PortsClassInstaller"
+
+;------------------------------------------------------------------------------
+
+[umpusbvista.NT]
+Include=msports.inf
+Needs=SerialEnumerator.NT
+CopyFiles=Drivers_Dir
+AddReg = umpusbvista.NT.AddReg
+
+[umpusbvista.NT.AddReg]
+HKR,,PortSubClass,1,01
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[umpusbvista.NT.HW]
+AddReg=umpusbvista.NT.HW.AddReg
+
+[umpusbvista.NT.HW.AddReg]                            
+HKR,,ImageFile,,"\SystemRoot\System32\drivers\umpf3410.i51"
+HKR,,SetMSRLinesZero,%REG_BINARY%,0x00  ; 0x80=DCD 0x40=RI 0x20=DSR 0x10=CTS
+HKR,,SetMSRLinesOne, %REG_BINARY%,0x00  ; 0x80=DCD 0x40=RI 0x20=DSR 0x10=CTS 
+HKR,,NumComPorts,%REG_DWORD%,0x01
+HKR,,NumLptPorts,%REG_DWORD%,0x00
+HKR,,"UpperFilters", 0x00010000, "serenum"
+
+
+[Drivers_Dir]
+umpusbvista.sys
+umpf3410.i51
+
+;-------------- Service installation
+[umpusbvista.NT.Services]
+Include=msports.inf
+Needs=SerialEnumerator.NT.Services
+AddService = umpusbvista, 0x00000002, usbuart_Service_Inst
+
+; -------------- 3410 driver install sections
+[usbuart_Service_Inst]
+DisplayName    = %StandardUMPUSB.SvcDesc%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\umpusbvista.sys
+LoadOrderGroup          = Extended Base
+
+;
+;--- umpusbvista WDF Coinstaller installation ------
+;
+[DestinationDirs]
+umpusbvista_CoInstaller_CopyFiles = 11
+
+[umpusbvista.NT.CoInstallers]
+AddReg=umpusbvista_CoInstaller_AddReg
+CopyFiles=umpusbvista_CoInstaller_CopyFiles
+
+[umpusbvista_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01009.dll,WdfCoInstaller"
+
+[umpusbvista_CoInstaller_CopyFiles]
+wdfcoinstaller01009.dll
+
+[SourceDisksFiles]
+wdfcoinstaller01009.dll=1 ; make sure the number matches with SourceDisksNames
+
+[umpusbvista.NT.Wdf]
+KmdfService = umpusbvista, umpusbvista_wdfsect
+[umpusbvista_wdfsect]
+KmdfLibraryVersion = 1.9
+
+[Strings]
+;
+; Non-Localizable Strings
+;
+
+REG_DWORD      = 0x00010001
+REG_BINARY     = 0x00000001
+;
+; Localizable Strings
+;
+
+TIInc="Texas Instruments, Inc"
+TI.Mfg="Texas Instruments"
+DiskId = "TI UMP Installation Disk"
+PortsClassName = "UMP USB Serial Port"
+3410.DeviceDesc = "TUSB3410 Device"
+341A.DeviceDesc = "TUSB3410 UART EVM"
+2FA0.DeviceDesc = "TLC59xxEVM"
+F430.DeviceDesc = "MSP-FET430UIF - VCP"
+F500.DeviceDesc = "MSP-EXP430F5438 USB - Serial Port"
+StandardUMPUSB.SvcDesc="Texas Instruments USB Serial Driver"
