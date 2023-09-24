@@ -1,0 +1,41 @@
+/********************************************************* 
+         定时器A利用辅助时钟在
+         P1.2（TA0.1）口输出PWM1.f=1000HZ;K=20%。
+         P2.2 (TA1.1) 口输出PWM1.f=125HZ;K=80%。
+         在网上搜索的TA0CCR0 TA0CCR1 貌似凭空出现的。
+*********************************************************/
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned char
+void port_init(void)               //端口初始化
+{
+  P1DIR |= BIT2;                   // P1.2用于外围模块输出即：产生PWM
+  P1SEL |= BIT2; 
+  P2DIR |= BIT2;                   // P1.2用于外围模块输出即：产生PWM
+  P2SEL |= BIT2;
+}
+void int_WDT(void)                 //看门狗初始化
+{
+   WDTCTL = WDTPW + WDTHOLD;       // Stop watchdog
+}
+void int_Time_A(void)              //定时器A初始化
+{
+  BCSCTL1 |=DIVA_0;                //辅助系统时钟不分频
+  TA0CTL = TASSEL_1 + MC_1;        //ACLK，upmode
+  TA0CCR0 = 35;                    // PWM Period
+  TA0CCR1 = 7;                     // TA0CCR1 PWM 占空比
+  TA0CCTL1 = OUTMOD_7;             // TA0CCR1 reset/set 
+  TA1CTL = TASSEL_1+ID_3 + MC_1;   //ACLK,8分频， up mode
+  TA1CCR0 =35;                     // PWM  Period
+  TA1CCTL1 = OUTMOD_7;             // TA1CCR1 reset/set
+  TA1CCR1 = 28;                    // TA1CCR1 PWM 占空比
+}
+void main( void )                  //主函数
+{     
+   port_init();                    // I/O口设置
+   int_WDT();                      //看门狗设置
+   int_Time_A();                   //定时器A设置
+   _EINT();                        // 开全局中断
+   LPM3;                           //进入低功耗模式0
+
+ }

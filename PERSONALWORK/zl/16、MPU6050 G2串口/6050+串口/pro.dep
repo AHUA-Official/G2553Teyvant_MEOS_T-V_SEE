@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>2781760738</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\main.c</file>
+      <file>$TOOLKIT_DIR$\config\lnk430F149.xcl</file>
+      <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
+      <file>$TOOLKIT_DIR$\inc\io430x14x.h</file>
+      <file>$TOOLKIT_DIR$\config\lnk430G2553.xcl</file>
+      <file>$PROJ_DIR$\Debug\Obj\pro.pbd</file>
+      <file>$TOOLKIT_DIR$\config\multiplier.xcl</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\Debug\Exe\pro.d43</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.r43</file>
+      <file>$TOOLKIT_DIR$\inc\io430.h</file>
+      <file>$TOOLKIT_DIR$\lib\dlib\dl430fn.r43</file>
+      <file>$TOOLKIT_DIR$\inc\in430.h</file>
+      <file>$PROJ_DIR$\Filter.c</file>
+      <file>$PROJ_DIR$\Mpu-6050.c</file>
+      <file>$PROJ_DIR$\mytype.h</file>
+      <file>$PROJ_DIR$\UASRT.c</file>
+      <file>$PROJ_DIR$\UASRT.h</file>
+      <file>$TOOLKIT_DIR$\inc\msp430x44x.h</file>
+      <file>$PROJ_DIR$\Filter.h</file>
+      <file>$PROJ_DIR$\Mpu-6050.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\yvals.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Defaults.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\stdio.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\ycheck.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Product.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\xencoding_limits.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Threads.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\ysizet.h</file>
+      <file>$TOOLKIT_DIR$\inc\dlib\c\ystdio.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\UASRT.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\Filter.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\Mpu-6050.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\Filter.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\clock.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\Mpu-6050.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\UASRT.pbi</file>
+      <file>$PROJ_DIR$\clock.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\clock.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\msp430x14x.h</file>
+      <file>$PROJ_DIR$\clock.h</file>
+      <file>$TOOLKIT_DIR$\lib\dlib\dl430fn.h</file>
+      <file>$TOOLKIT_DIR$\inc\msp430g2553.h</file>
+    </outputs>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 8</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.c</name>
+      <outputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 9</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 7</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 42 12 2 15 40 17 20 19 23 24 21 22 41 25 26 27 28 29</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 42 12 2 15 40 17 20 19 23 24 21 22 25 26 27 28 29</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Obj\pro.pbd</name>
+      <inputs>
+        <tool>
+          <name>BILINK</name>
+          <file> 31 35 36 38 7</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\pro.d43</name>
+      <inputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 4 33 32 30 34 9 11</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Filter.c</name>
+      <outputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 33</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 31</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 19</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 19</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Mpu-6050.c</name>
+      <outputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 32</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 35</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 15 20 42 12 2</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 15 20 42 12 2</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\UASRT.c</name>
+      <outputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 30</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 36</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 17 42 12 2</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 17 42 12 2</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\clock.c</name>
+      <outputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 34</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 38</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 40 42 12 2</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 40 42 12 2</file>
+        </tool>
+      </inputs>
+    </file>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs/>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>XLINK</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+

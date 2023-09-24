@@ -1,0 +1,479 @@
+******************************************************************************
+                  MSP430 Linker PC v4.0.0                      
+******************************************************************************
+>> Linked Fri Jul 05 19:31:22 2013
+
+OUTPUT FILE NAME:   <12_LED_KEY_I2C_Hard_or_Soft.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 0000c3ba
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  SFR                   00000000   00000010  00000000  00000010  RWIX
+  PERIPHERALS_8BIT      00000010   000000f0  00000000  000000f0  RWIX
+  PERIPHERALS_16BIT     00000100   00000100  00000000  00000100  RWIX
+  RAM                   00000200   00000200  00000068  00000198  RWIX
+  INFOD                 00001000   00000040  00000000  00000040  RWIX
+  INFOC                 00001040   00000040  00000000  00000040  RWIX
+  INFOB                 00001080   00000040  00000000  00000040  RWIX
+  INFOA                 000010c0   00000040  00000000  00000040  RWIX
+  FLASH                 0000c000   00003fe0  000005ae  00003a32  RWIX
+  INT00                 0000ffe0   00000002  00000000  00000002  RWIX
+  INT01                 0000ffe2   00000002  00000000  00000002  RWIX
+  INT02                 0000ffe4   00000002  00000000  00000002  RWIX
+  INT03                 0000ffe6   00000002  00000000  00000002  RWIX
+  INT04                 0000ffe8   00000002  00000000  00000002  RWIX
+  INT05                 0000ffea   00000002  00000000  00000002  RWIX
+  INT06                 0000ffec   00000002  00000002  00000000  RWIX
+  INT07                 0000ffee   00000002  00000000  00000002  RWIX
+  INT08                 0000fff0   00000002  00000000  00000002  RWIX
+  INT09                 0000fff2   00000002  00000000  00000002  RWIX
+  INT10                 0000fff4   00000002  00000002  00000000  RWIX
+  INT11                 0000fff6   00000002  00000000  00000002  RWIX
+  INT12                 0000fff8   00000002  00000000  00000002  RWIX
+  INT13                 0000fffa   00000002  00000000  00000002  RWIX
+  INT14                 0000fffc   00000002  00000000  00000002  RWIX
+  RESET                 0000fffe   00000002  00000002  00000000  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.pinit     0    0000c000    00000000     UNINITIALIZED
+
+.bss       0    00000200    00000018     UNINITIALIZED
+                  00000200    00000007     I2C.obj (.bss)
+                  00000207    00000005     main.obj (.bss)
+                  0000020c    00000004     TCA6416A.obj (.bss)
+                  00000210    00000004     rts430.lib : _lock.obj (.bss)
+                  00000214    00000004                : boot.obj (.bss)
+
+.stack     0    000003b0    00000050     UNINITIALIZED
+                  000003b0    00000002     rts430.lib : boot.obj (.stack)
+                  000003b2    0000004e     --HOLE--
+
+.text      0    0000c000    0000056a     
+                  0000c000    000000b4     TCA6416A.obj (.text:PinOUT)
+                  0000c0b4    0000008a     main.obj (.text:I2C_IODect)
+                  0000c13e    00000070     main.obj (.text:main)
+                  0000c1ae    00000056     TCA6416A.obj (.text:TCA6416A_Init)
+                  0000c204    00000052     TCA6416A.obj (.text:PinIN)
+                  0000c256    00000046     rts430.lib : autoinit.obj (.text:_auto_init)
+                  0000c29c    0000003e     I2C.obj (.text:USCIAB0TX_ISR)
+                  0000c2da    00000038     I2C.obj (.text:I2C_Init)
+                  0000c312    0000002c     rts430.lib : div16s.obj (.text)
+                  0000c33e    0000002c                : lsl16.obj (.text)
+                  0000c36a    0000002a     I2C.obj (.text:I2C_RxFrame)
+                  0000c394    00000026     I2C.obj (.text:I2C_TxFrame)
+                  0000c3ba    00000026     rts430.lib : boot.obj (.text:_c_int00_noexit)
+                  0000c3e0    00000022     I2C.obj (.text:I2C_TxFrame_ISR)
+                  0000c402    00000020     I2C.obj (.text:I2C_Rx_Init)
+                  0000c422    00000020     I2C.obj (.text:I2C_Tx_Init)
+                  0000c442    0000001e     main.obj (.text:I2C_IO13_Onclick)
+                  0000c460    0000001e     I2C.obj (.text:I2C_RxFrame_ISR)
+                  0000c47e    0000001c     main.obj (.text:I2C_IO11_Onclick)
+                  0000c49a    0000001c     main.obj (.text:I2C_IO12_Onclick)
+                  0000c4b6    0000001a     main.obj (.text:I2C_IO10_Onclick)
+                  0000c4d0    00000018     TCA6416A.obj (.text:TCA6416_Rx_Frame)
+                  0000c4e8    00000018     TCA6416A.obj (.text:TCA6416_Tx_Frame)
+                  0000c500    00000016     rts430.lib : div16u.obj (.text)
+                  0000c516    00000014                : memset.obj (.text:memset)
+                  0000c52a    00000012                : memcpy.obj (.text:memcpy)
+                  0000c53c    00000010                : epilog.obj (.text)
+                  0000c54c    0000000c     main.obj (.text:WDT_init)
+                  0000c558    00000008     main.obj (.text:WDT_ISR)
+                  0000c560    00000004     rts430.lib : pre_init.obj (.text:_system_pre_init)
+                  0000c564    00000004                : exit.obj (.text:abort)
+                  0000c568    00000002                : _lock.obj (.text:_nop)
+
+.cinit     0    0000c56a    00000044     
+                  0000c56a    0000001d     main.obj (.cinit)
+                  0000c587    00000001     --HOLE-- [fill = 0]
+                  0000c588    00000011     I2C.obj (.cinit)
+                  0000c599    00000001     --HOLE-- [fill = 0]
+                  0000c59a    00000011     TCA6416A.obj (.cinit)
+                  0000c5ab    00000001     --HOLE-- [fill = 0]
+                  0000c5ac    00000002     (.pad.cinit) [fill = 0]
+
+.int06     0    0000ffec    00000002     
+                  0000ffec    00000002     I2C.obj (.int06)
+
+.int10     0    0000fff4    00000002     
+                  0000fff4    00000002     main.obj (.int10)
+
+.reset     0    0000fffe    00000002     
+                  0000fffe    00000002     rts430.lib : boot.obj (.reset)
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address    name
+--------   ----
+00000200   .bss
+0000c000   .text
+0000004a   ADC10AE0
+000001b0   ADC10CTL0
+000001b2   ADC10CTL1
+00000048   ADC10DTC0
+00000049   ADC10DTC1
+000001b4   ADC10MEM
+000001bc   ADC10SA
+00000057   BCSCTL1
+00000058   BCSCTL2
+00000053   BCSCTL3
+0000c564   C$$EXIT
+00000059   CACTL1
+0000005a   CACTL2
+000010fb   CALBC1_12MHZ
+000010f9   CALBC1_16MHZ
+000010ff   CALBC1_1MHZ
+000010fd   CALBC1_8MHZ
+000010fa   CALDCO_12MHZ
+000010f8   CALDCO_16MHZ
+000010fe   CALDCO_1MHZ
+000010fc   CALDCO_8MHZ
+0000005b   CAPD
+00000056   DCOCTL
+00000128   FCTL1
+0000012a   FCTL2
+0000012c   FCTL3
+0000c4b6   I2C_IO10_Onclick
+0000c47e   I2C_IO11_Onclick
+0000c49a   I2C_IO12_Onclick
+0000c442   I2C_IO13_Onclick
+0000c0b4   I2C_IODect
+0000c2da   I2C_Init
+0000c36a   I2C_RxFrame
+0000c460   I2C_RxFrame_ISR
+0000c402   I2C_Rx_Init
+00000206   I2C_State
+0000c394   I2C_TxFrame
+0000c3e0   I2C_TxFrame_ISR
+0000c422   I2C_Tx_Init
+00000000   IE1
+00000001   IE2
+00000002   IFG1
+00000003   IFG2
+0000c33e   I_LSL
+0000c366   I_LSL_1
+0000c354   I_LSL_10
+0000c352   I_LSL_11
+0000c350   I_LSL_12
+0000c34e   I_LSL_13
+0000c34c   I_LSL_14
+0000c34a   I_LSL_15
+0000c364   I_LSL_2
+0000c362   I_LSL_3
+0000c360   I_LSL_4
+0000c35e   I_LSL_5
+0000c35c   I_LSL_6
+0000c35a   I_LSL_7
+0000c358   I_LSL_8
+0000c356   I_LSL_9
+00000022   P1DIR
+00000025   P1IE
+00000024   P1IES
+00000023   P1IFG
+00000020   P1IN
+00000021   P1OUT
+00000027   P1REN
+00000026   P1SEL
+00000041   P1SEL2
+0000002a   P2DIR
+0000002d   P2IE
+0000002c   P2IES
+0000002b   P2IFG
+00000028   P2IN
+00000029   P2OUT
+0000002f   P2REN
+0000002e   P2SEL
+00000042   P2SEL2
+0000001a   P3DIR
+00000018   P3IN
+00000019   P3OUT
+00000010   P3REN
+0000001b   P3SEL
+00000043   P3SEL2
+0000c204   PinIN
+0000c000   PinOUT
+00000172   TA0CCR0
+00000174   TA0CCR1
+00000176   TA0CCR2
+00000162   TA0CCTL0
+00000164   TA0CCTL1
+00000166   TA0CCTL2
+00000160   TA0CTL
+0000012e   TA0IV
+00000170   TA0R
+00000192   TA1CCR0
+00000194   TA1CCR1
+00000196   TA1CCR2
+00000182   TA1CCTL0
+00000184   TA1CCTL1
+00000186   TA1CCTL2
+00000180   TA1CTL
+0000011e   TA1IV
+00000190   TA1R
+0000c1ae   TCA6416A_Init
+0000020c   TCA6416A_InputBuffer
+0000c4d0   TCA6416_Rx_Frame
+0000c4e8   TCA6416_Tx_Frame
+0000005d   UCA0ABCTL
+00000062   UCA0BR0
+00000063   UCA0BR1
+00000060   UCA0CTL0
+00000061   UCA0CTL1
+0000005f   UCA0IRRCTL
+0000005e   UCA0IRTCTL
+00000064   UCA0MCTL
+00000066   UCA0RXBUF
+00000065   UCA0STAT
+00000067   UCA0TXBUF
+0000006a   UCB0BR0
+0000006b   UCB0BR1
+00000068   UCB0CTL0
+00000069   UCB0CTL1
+0000006c   UCB0I2CIE
+00000118   UCB0I2COA
+0000011a   UCB0I2CSA
+0000006e   UCB0RXBUF
+0000006d   UCB0STAT
+0000006f   UCB0TXBUF
+0000c29c   USCIAB0TX_ISR
+00000120   WDTCTL
+0000c558   WDT_ISR
+0000c54c   WDT_init
+00000400   __STACK_END
+00000050   __STACK_SIZE
+00000001   __TI_args_main
+00000001   __TI_auto_init
+00000001   __TI_exit
+ffffffff   __binit__
+00000200   __bss__
+ffffffff   __c_args__
+0000c56a   __cinit__
+0000c312   __divi
+0000c500   __divu
+00000218   __end__
+0000c56a   __etext__
+ffffffff   __pinit__
+0000c312   __remi
+0000c500   __remu
+0000c000   __text__
+0000c256   _auto_init
+0000c3ba   _c_int00
+0000c3ba   _c_int00_noexit
+00000214   _cleanup_ptr
+00000216   _dtors_ptr
+00000210   _lock
+0000c568   _nop
+0000fffe   _reset_vector
+000003b0   _stack
+0000c560   _system_pre_init
+00000212   _unlock
+0000c564   abort
+ffffffff   binit
+0000c56a   cinit
+00000218   end
+0000c56a   etext
+0000c548   func_epilog_1
+0000c546   func_epilog_2
+0000c544   func_epilog_3
+0000c542   func_epilog_4
+0000c540   func_epilog_5
+0000c53e   func_epilog_6
+0000c53c   func_epilog_7
+0000c13e   main
+0000c52a   memcpy
+0000c516   memset
+ffffffff   pinit
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address    name
+--------   ----
+00000000   IE1
+00000001   IE2
+00000001   __TI_args_main
+00000001   __TI_auto_init
+00000001   __TI_exit
+00000002   IFG1
+00000003   IFG2
+00000010   P3REN
+00000018   P3IN
+00000019   P3OUT
+0000001a   P3DIR
+0000001b   P3SEL
+00000020   P1IN
+00000021   P1OUT
+00000022   P1DIR
+00000023   P1IFG
+00000024   P1IES
+00000025   P1IE
+00000026   P1SEL
+00000027   P1REN
+00000028   P2IN
+00000029   P2OUT
+0000002a   P2DIR
+0000002b   P2IFG
+0000002c   P2IES
+0000002d   P2IE
+0000002e   P2SEL
+0000002f   P2REN
+00000041   P1SEL2
+00000042   P2SEL2
+00000043   P3SEL2
+00000048   ADC10DTC0
+00000049   ADC10DTC1
+0000004a   ADC10AE0
+00000050   __STACK_SIZE
+00000053   BCSCTL3
+00000056   DCOCTL
+00000057   BCSCTL1
+00000058   BCSCTL2
+00000059   CACTL1
+0000005a   CACTL2
+0000005b   CAPD
+0000005d   UCA0ABCTL
+0000005e   UCA0IRTCTL
+0000005f   UCA0IRRCTL
+00000060   UCA0CTL0
+00000061   UCA0CTL1
+00000062   UCA0BR0
+00000063   UCA0BR1
+00000064   UCA0MCTL
+00000065   UCA0STAT
+00000066   UCA0RXBUF
+00000067   UCA0TXBUF
+00000068   UCB0CTL0
+00000069   UCB0CTL1
+0000006a   UCB0BR0
+0000006b   UCB0BR1
+0000006c   UCB0I2CIE
+0000006d   UCB0STAT
+0000006e   UCB0RXBUF
+0000006f   UCB0TXBUF
+00000118   UCB0I2COA
+0000011a   UCB0I2CSA
+0000011e   TA1IV
+00000120   WDTCTL
+00000128   FCTL1
+0000012a   FCTL2
+0000012c   FCTL3
+0000012e   TA0IV
+00000160   TA0CTL
+00000162   TA0CCTL0
+00000164   TA0CCTL1
+00000166   TA0CCTL2
+00000170   TA0R
+00000172   TA0CCR0
+00000174   TA0CCR1
+00000176   TA0CCR2
+00000180   TA1CTL
+00000182   TA1CCTL0
+00000184   TA1CCTL1
+00000186   TA1CCTL2
+00000190   TA1R
+00000192   TA1CCR0
+00000194   TA1CCR1
+00000196   TA1CCR2
+000001b0   ADC10CTL0
+000001b2   ADC10CTL1
+000001b4   ADC10MEM
+000001bc   ADC10SA
+00000200   .bss
+00000200   __bss__
+00000206   I2C_State
+0000020c   TCA6416A_InputBuffer
+00000210   _lock
+00000212   _unlock
+00000214   _cleanup_ptr
+00000216   _dtors_ptr
+00000218   __end__
+00000218   end
+000003b0   _stack
+00000400   __STACK_END
+000010f8   CALDCO_16MHZ
+000010f9   CALBC1_16MHZ
+000010fa   CALDCO_12MHZ
+000010fb   CALBC1_12MHZ
+000010fc   CALDCO_8MHZ
+000010fd   CALBC1_8MHZ
+000010fe   CALDCO_1MHZ
+000010ff   CALBC1_1MHZ
+0000c000   .text
+0000c000   PinOUT
+0000c000   __text__
+0000c0b4   I2C_IODect
+0000c13e   main
+0000c1ae   TCA6416A_Init
+0000c204   PinIN
+0000c256   _auto_init
+0000c29c   USCIAB0TX_ISR
+0000c2da   I2C_Init
+0000c312   __divi
+0000c312   __remi
+0000c33e   I_LSL
+0000c34a   I_LSL_15
+0000c34c   I_LSL_14
+0000c34e   I_LSL_13
+0000c350   I_LSL_12
+0000c352   I_LSL_11
+0000c354   I_LSL_10
+0000c356   I_LSL_9
+0000c358   I_LSL_8
+0000c35a   I_LSL_7
+0000c35c   I_LSL_6
+0000c35e   I_LSL_5
+0000c360   I_LSL_4
+0000c362   I_LSL_3
+0000c364   I_LSL_2
+0000c366   I_LSL_1
+0000c36a   I2C_RxFrame
+0000c394   I2C_TxFrame
+0000c3ba   _c_int00
+0000c3ba   _c_int00_noexit
+0000c3e0   I2C_TxFrame_ISR
+0000c402   I2C_Rx_Init
+0000c422   I2C_Tx_Init
+0000c442   I2C_IO13_Onclick
+0000c460   I2C_RxFrame_ISR
+0000c47e   I2C_IO11_Onclick
+0000c49a   I2C_IO12_Onclick
+0000c4b6   I2C_IO10_Onclick
+0000c4d0   TCA6416_Rx_Frame
+0000c4e8   TCA6416_Tx_Frame
+0000c500   __divu
+0000c500   __remu
+0000c516   memset
+0000c52a   memcpy
+0000c53c   func_epilog_7
+0000c53e   func_epilog_6
+0000c540   func_epilog_5
+0000c542   func_epilog_4
+0000c544   func_epilog_3
+0000c546   func_epilog_2
+0000c548   func_epilog_1
+0000c54c   WDT_init
+0000c558   WDT_ISR
+0000c560   _system_pre_init
+0000c564   C$$EXIT
+0000c564   abort
+0000c568   _nop
+0000c56a   __cinit__
+0000c56a   __etext__
+0000c56a   cinit
+0000c56a   etext
+0000fffe   _reset_vector
+ffffffff   __binit__
+ffffffff   __c_args__
+ffffffff   __pinit__
+ffffffff   binit
+ffffffff   pinit
+
+[178 symbols]

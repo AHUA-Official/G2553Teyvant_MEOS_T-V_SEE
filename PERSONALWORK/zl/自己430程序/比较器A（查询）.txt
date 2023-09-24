@@ -1,0 +1,30 @@
+/*
+               通过P1.1的输入电压与内部电压0.5VCC比较
+
+    现象：     当Vp1.1>0.5VCC时，P1.0=1，即LED1发光
+               当Vp1.1<0.5VCC时，P1.0=0，即LED1熄灭
+*/
+#include <msp430g2553.h>
+
+void main (void)
+{
+  WDTCTL = WDTPW + WDTHOLD;               // Stop WDT
+  P1DIR |= BIT0;                          // P1.0 output
+  CACTL1 = CARSEL + CAREF_2 + CAON;       // 0.5 Vcc = -comp, on
+  
+                                          //CARSEL内部参考源加到比较器的负端
+                                          //CAREF_2选择0.5 Vcc
+                                          //CAON打开比较器
+  
+  CACTL2 = P2CA4;                         // P1.1/CA1 = +comp
+                                          //
+  while (1)                               // Test comparator_A output
+  {
+    if ((CAOUT & CACTL2))
+      P1OUT |= 0x01;                      // if CAOUT set, set P1.0
+    else
+      P1OUT &= ~0x01;                     // else reset
+    
+  }
+}
+

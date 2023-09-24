@@ -1,0 +1,50 @@
+uchar Ht1621Tab1[]={0x0c,0x0a,0x0c,  //0  不带小数点表格
+                    0x00,0x00,0x0c,  //1
+                    0x04,0x0e,0x08,  //2
+                    0x00,0x0e,0x0c,  //3
+                    0x08,0x04,0x0c,  //4
+                    0x08,0x0e,0x04,  //5
+                    0x0c,0x0e,0x04,  //6
+                    0x00,0x08,0x0c,  //7
+                    0x0c,0x0e,0x0c,  //8
+                    0x08,0x0e,0x0c}; //9
+uchar Ht1621Tab2[]={0x0e,0x0a,0x0c,  //0    带小数点表格
+                    0x02,0x00,0x0c,  //1
+                    0x06,0x0e,0x08,  //2
+                    0x02,0x0e,0x0c,  //3
+                    0x0a,0x04,0x0c,  //4
+                    0x0a,0x0e,0x04,  //5
+                    0x0e,0x0e,0x04,  //6
+                    0x02,0x08,0x0c,  //7
+                    0x0e,0x0e,0x0c,  //8
+                    0x0a,0x0e,0x0c}; //9
+uchar Ht1621Tab3[]={0x0c,0x0a,0x0e,  //0  显示最前端1，LOW BATTERY CONTINUITY
+                    0x00,0x00,0x0e,  //1
+                    0x04,0x0e,0x0a,  //2
+                    0x00,0x0e,0x0e,  //3
+                    0x08,0x04,0x0e,  //4
+                    0x08,0x0e,0x06,  //5
+                    0x0c,0x0e,0x06,  //6
+                    0x00,0x08,0x0e,  //7
+                    0x0c,0x0e,0x0e,  //8
+                    0x08,0x0e,0x0e}; //9
+
+void display (void)
+{
+       Ht1621WrOneData(0x01,Ht1621Tab1[3*qian]);
+       Ht1621WrOneData(0x03,Ht1621Tab1[3*qian+1]);
+       Ht1621WrOneData(0x05,Ht1621Tab1[3*qian+2]);//在此地址调用 Ht1621Tab3
+                                                  //显示 最前端1
+       Ht1621WrOneData(0x07,Ht1621Tab1[3*bai]);
+       Ht1621WrOneData(0x09,Ht1621Tab1[3*bai+1]);
+       Ht1621WrOneData(0x0b,Ht1621Tab1[3*bai+2]);
+       
+       Ht1621WrOneData(0x0d,Ht1621Tab2[3*shi]);
+       Ht1621WrOneData(0x0f,Ht1621Tab2[3*shi+1]);
+       Ht1621WrOneData(0x11,Ht1621Tab3[3*shi+2]);//在此地址调用 Ht1621Tab3 
+                                                 //显示字母LOW BATTERY
+       Ht1621WrOneData(0x13,Ht1621Tab1[3*ge]);   
+       Ht1621WrOneData(0x15,Ht1621Tab1[3*ge+1]);
+       Ht1621WrOneData(0x17,Ht1621Tab3[3*ge+2]); //在此地址调用 Ht1621Tab3  
+                                                 //显示CONTINUITY
+}

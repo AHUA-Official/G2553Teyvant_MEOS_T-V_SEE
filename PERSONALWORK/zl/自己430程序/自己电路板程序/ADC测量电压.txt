@@ -1,0 +1,172 @@
+/******************************************************************************
+
+  利用ADC模数转换，来测量电压（量程0V——3.3V），P1.1作为输入电压，
+
+  在八位共阴数码管的高三位显示电压值
+
+
+******************************************************************************/
+#include "msp430g2553.h"
+#include <math.h>
+#define uint unsigned int 
+#define uchar unsigned 
+
+//以下是74HC595所需的宏定义
+#define HC595_Store_H P2OUT |= BIT0
+#define HC595_Store_L P2OUT &= ~ BIT0
+#define HC595_A_H     P2OUT |= BIT1
+#define HC595_A_L     P2OUT &= ~ BIT1
+#define HC595_Shift_H P2OUT |= BIT2
+#define HC595_Shift_L P2OUT &= ~ BIT2
+//以上是74HC595所需的宏定义
+unsigned char const LedData[]= {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,
+                                0x7f,0x6f,0x77,0x7C,0x39,0x5E,0x79,0x71,//共阴数码管段选数组(0-F）
+                                0xBf,0x86,0xDb,0xCf,0xE6,0xEd,0xFd,0x87,    
+                                0xEf,0xDf,0xF7,0xFC,0xB9,0xDE,0xF9,0xF1,};//共阴数码管(带小数点)段选数组(0-F）
+unsigned char const LedPos[] = {0xFE,0xFD,0xFB,0xF7,0xEF,0xDF,0xBF,0x7F}; //数码管位选数组，分别选通每一位数码管
+
+/**********************************************
+                函数声明
+**********************************************/
+void init_devices(void);          //初始化配置         
+void int_Clock(void);             //时钟配置
+void port_init(void);             //IO配置
+void ADC_init(void);              //ADC转换配置           
+void Delay_us(uint us);           // 延时us  前提是f=1MHZ
+void Delay_ms(uint ms);           // 延时ms  前提是f=1MHZ
+//以下是74HC595所需的函数定义
+void HC595shift(void);
+void HC595store(void);
+void HC595send(uchar x);
+void display(uchar pos,uchar dat); //pos则是表示选通哪一位，dat则是表示显示什么数据
+
+void display_dianya(void);         //显示电压函数
+//以上是74HC595所需的函数定义
+
+volatile uchar  ge=0,shi=0,bai=0;    //数码管显示的位数
+volatile float voltage=0,VCC_GND=3.3;//voltage为测的电压，VCC_GND为最大测量电压
+volatile uint  voltage_display=0;    //数码管显示的示数
+
+void main(void)
+{
+  init_devices();
+  _EINT(); 
+  while(1)
+  {
+    ADC10CTL0 |= ENC + ADC10SC;             // Sampling and conversion star
+    LPM3;                                   // LPM0, ADC10_ISR will force exit
+    voltage = ADC10MEM*VCC_GND/1023;
+    voltage_display=voltage*100;
+    display_dianya(); 
+    
+  }
+}
+
+void init_devices(void)
+{
+   WDTCTL = WDTPW + WDTHOLD;    // Stop watchdog
+   int_Clock();
+   port_init();
+   ADC_init();
+}
+void int_Clock(void)               //时钟初始化
+{
+  BCSCTL1 = CALBC1_1MHZ;           //DCO数字振荡器=1MHZ
+  DCOCTL  = CALBC1_1MHZ;           //DCO数字振荡器=1MHZ
+}
+void port_init(void)              //端口初始化
+{
+   P1SEL |= BIT1;                  //P1.1为外围复用功能
+   P2DIR |= (BIT0+BIT1+BIT2);      
+}
+void ADC_init(void)
+{
+  ADC10CTL0 = ADC10SHT_3 + ADC10ON + ADC10IE; // 64 x ADC10CLKs:采样保持时间
+                                              // ADC开启, ADC10 中断使能
+  ADC10CTL1 = INCH_1+ADC10SSEL_1;             // 输入通道选择A1，ADC10时钟源选择ACLK
+  ADC10AE0 |= BIT1;                           // PA.1 ADC option select
+}
+void Delay_us(uint us)           // 延时us  前提是f=8MHZ
+{    
+  uint i;
+  for(i=0;i<us;i++)
+  __delay_cycles(1);      
+}
+void Delay_ms(uint ms)           // 延时ms  前提是f=8MHZ
+{
+  uint j;
+  for(j=0;j<ms;j++)
+  __delay_cycles(1000); 
+}
+
+void HC595send(uchar x)
+{
+   uchar n,temp;
+   for(n=0;n<8;n++)	//一个字节要分8次写入
+   {
+      temp=x&0x80;	//记住一定要先写最高位
+      if(temp!=0)	//判断是否不等于0
+      {
+         HC595_A_H;     //P1.1赋为1
+         HC595shift();	//使寄存器移位
+      }
+      else		//等于0
+      {
+         HC595_A_L;     //P1.1赋为0
+         HC595shift();  //使寄存器移位
+      }	 
+      x<<=1;		//数据左移一位，那么下一个循环将是获取
+                        //第7位的数据，跟着是第6位,第5位,,,第1位
+                        //最后把所有数据都移入HC595
+    }
+}
+/***************************************
+ 字节写入存储寄存器，并且送往输出端口，数据刷新输出
+***************************************/
+void HC595store(void) 
+{
+   HC595_Store_L;   //先将存储时钟置低                  
+   HC595_Store_H;   //将存储时钟置高产生一个上升沿，就会把一个字节
+                    //写入存储寄存器，即将74HC595 的数据刷新输出。
+} 
+/**************************************
+           寄存器移位函数
+**************************************/
+void HC595shift(void) 
+{
+   HC595_Shift_L;  //要将时钟线置低                 
+   HC595_Shift_H;  //把时钟线拉高，则是上升沿，就会把进行寄存器移位操作
+}
+/*************************************
+        显示函数，在某位显示某数据
+*************************************/
+void display(uchar pos,uchar dat) 
+{
+   HC595send(LedPos[pos]);   //一定要先把位选数据送入上级HC595 
+                             //当把段选数据送入上级HC595时，
+                             //位选数据则会移到下级HC595中
+   HC595send(LedData[dat]);  //把数据送入下级HC595时，
+                             //位选数据则会移到上级HC595中
+   HC595store(); 	     //把数据显示出来
+   
+}
+
+void display_dianya(void)
+{
+   ge=voltage_display%10;
+   shi=voltage_display%100/10;
+   bai=voltage_display/100;
+   display(0,bai+16);
+   Delay_ms(3);
+   display(1,shi);
+   Delay_ms(3);
+   display(2,ge);
+   Delay_ms(1);
+}
+
+// ADC10 interrupt service routine
+#pragma vector=ADC10_VECTOR
+__interrupt void ADC10_ISR(void)
+{
+  LPM3_EXIT;        // Clear CPUOFF bit from 0(SR)
+}

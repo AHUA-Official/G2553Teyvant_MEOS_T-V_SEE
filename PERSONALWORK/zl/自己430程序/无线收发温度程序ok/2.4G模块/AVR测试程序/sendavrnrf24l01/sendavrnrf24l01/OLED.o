@@ -1,0 +1,207 @@
+XL
+H 1 areas F global symbols
+M OLED.c
+S push_gset1 Ref0000
+S push_gset4 Ref0000
+S _OLEDMode Ref0000
+S _I2C_Write Ref0000
+S pop_gset1 Ref0000
+S pop_gset4 Ref0000
+S _Contrast Ref0000
+S _Bright Ref0000
+S _Flag Ref0000
+S _I2C_Read Ref0000
+A text size 1BA flags 0
+dbfile D:\OLED\OLED.c
+dbfunc e InitOLED 0 fV
+dbline FFFFFFFF 0
+dbline 14 0
+dbline 15 0
+dbline FFFFFFFE 2
+dbline 0 2
+dbfunc e WriteOLED 4 fV
+dbsym r temp2 14 c
+dbsym r temp 16 c
+dbsym r val A c
+dbsym r address C c
+dbline FFFFFFFF A
+dbline 19 A
+dbline 1A A
+dbline 1B C
+dbline 1D 10
+dbline 1E 10
+dbline 1F 16
+dbline 20 1C
+dbline 21 20
+dbline 22 20
+dbline 23 22
+dbline 24 24
+dbline 25 28
+dbline 24 28
+dbline 24 2A
+dbline 26 2E
+dbline 28 2E
+dbline 29 2E
+dbline 1C 2E
+dbline 2A 32
+dbline 2B 36
+dbline 2B 36
+dbline 2B 40
+dbline 2B 40
+dbline FFFFFFFE 40
+dbline 0 42
+dbfunc e ReadOLED 44 fc
+dbsym r temp 14 c
+dbsym r address 14 c
+dbline FFFFFFFF 48
+dbline 2F 48
+dbline 31 48
+dbline 32 4E
+dbline FFFFFFFE 4E
+dbline 0 50
+dbfunc e WriteMode 52 fV
+dbsym l temp 1 c
+dbsym r temp2 14 c
+dbline FFFFFFFF 54
+dbline 36 54
+dbline 38 54
+dbline 39 56
+dbline 39 56
+dbline 39 60
+dbline 39 60
+dbline 3B 60
+dbline 3C 6A
+dbline 3D 6A
+dbline 3E 70
+dbline 3F 76
+dbline 40 7C
+dbline 41 82
+dbline 43 88
+dbline 44 8E
+dbline 45 96
+dbline 46 9E
+dbline 47 A4
+dbline 48 AA
+dbline 4A B0
+dbline 4B B6
+dbline 4C BC
+dbline 4D C2
+dbline 4E C8
+dbline 4F CE
+dbline 51 D4
+dbline 52 DA
+dbline 53 E0
+dbline 54 E6
+dbline 55 EC
+dbline 56 F2
+dbline 58 F8
+dbline 59 FE
+dbline 5A 104
+dbline 5B 10A
+dbline 5D 10C
+dbline 5E 10C
+dbline 5F 112
+dbline 60 118
+dbline 61 11E
+dbline 62 124
+dbline 64 12A
+dbline 65 130
+dbline 66 138
+dbline 67 140
+dbline 68 146
+dbline 69 14C
+dbline 6B 152
+dbline 6C 158
+dbline 6D 15E
+dbline 6E 164
+dbline 6F 16A
+dbline 70 170
+dbline 72 176
+dbline 73 17C
+dbline 74 182
+dbline 75 188
+dbline 76 18E
+dbline 77 194
+dbline 79 19A
+dbline 7A 1A0
+dbline 7B 1A6
+dbline 7C 1AC
+dbline FFFFFFFE 1AC
+dbline 0 1AE
+dbfunc e WriteBright 1B0 fV
+dbline FFFFFFFF 1B0
+dbline 80 1B0
+dbline 82 1B0
+dbline FFFFFFFE 1B8
+dbline 0 1B8
+S _InitOLED Def0000
+S _WriteOLED Def0004
+S _WriteBright Def01B0
+S _WriteMode Def0052
+S _ReadOLED Def0044
+T 00 00 28 D0 08 95
+R 00 00 00 00
+T 04 00 00 D0 A2 2E C0 2E 66 27 44 E1 0F C0 2A 2D
+R 00 00 00 00 82 02 01 00
+T 12 00 0C 2D 00 D0 0C 2D 15 D0 60 2F 0A 15 49 F0
+R 00 00 00 00 82 04 03 00
+T 20 00 4A 95 A8 95 66 27 01 C0 63 95 64 36 E8 F3
+R 00 00 00 00
+T 2E 00 44 23 79 F7 44 23 29 F4 80 91 00 00 82 60
+R 00 00 00 00 02 0C 08 00
+T 3C 00 80 93 00 00 00 D0 08 95
+R 00 00 00 00 02 04 08 00 82 06 05 00
+T 44 00 00 D0 40 2F 04 2F 00 D0 40 2F 00 D0 08 95
+R 00 00 00 00 82 02 00 00 82 08 09 00 82 0C 04 00
+T 52 00 00 D0 44 27 80 91 00 00 8D 7F 80 93 00 00
+R 00 00 00 00 82 02 00 00 02 08 08 00 02 0E 08 00
+T 60 00 80 91 00 00 85 35 09 F0 51 C0 28 E7 01 E0
+R 00 00 00 00 02 04 02 00
+T 6E 00 CA DF 20 E3 02 E0 C7 DF 28 E7 03 E0 C4 DF
+R 00 00 00 00
+T 7C 00 20 E3 04 E0 C1 DF 28 E7 05 E0 BE DF 20 E3
+R 00 00 00 00
+T 8A 00 06 E0 BB DF 20 91 00 00 07 E0 B7 DF 20 91
+R 00 00 00 00 02 08 06 00
+T 98 00 00 00 08 E0 B3 DF 22 E1 09 E0 B0 DF 21 E0
+R 00 00 00 00 02 02 07 00
+T A6 00 0A E0 AD DF 22 27 0B E0 AA DF 22 E0 0C E0
+R 00 00 00 00
+T B4 00 A7 DF 22 27 0D E0 A4 DF 20 E8 0E E0 A1 DF
+R 00 00 00 00
+T C2 00 2A E0 0F E0 9E DF 2B E1 00 E1 9B DF 27 E0
+R 00 00 00 00
+T D0 00 01 E1 98 DF 28 E0 02 E1 95 DF 2B E7 03 E1
+R 00 00 00 00
+T DE 00 92 DF 2F E0 04 E1 8F DF 28 ED 05 E1 8C DF
+R 00 00 00 00
+T EC 00 2C E0 06 E1 89 DF 21 E0 07 E1 86 DF 20 EC
+R 00 00 00 00
+T FA 00 08 E1 83 DF 22 27 09 E1 80 DF 22 27 0A E1
+R 00 00 00 00
+T 08 01 7D DF 50 C0 28 E7 01 E0 79 DF 28 E3 02 E0
+R 00 00 00 00
+T 16 01 76 DF 28 E7 03 E0 73 DF 28 E3 04 E0 70 DF
+R 00 00 00 00
+T 24 01 28 E7 05 E0 6D DF 28 E3 06 E0 6A DF 20 91
+R 00 00 00 00
+T 32 01 00 00 07 E0 66 DF 20 91 00 00 08 E0 62 DF
+R 00 00 00 00 02 02 06 00 02 0A 07 00
+T 40 01 2A E4 09 E0 5F DF 20 E1 0A E0 5C DF 22 27
+R 00 00 00 00
+T 4E 01 0B E0 59 DF 22 E0 0C E0 56 DF 22 27 0D E0
+R 00 00 00 00
+T 5C 01 53 DF 20 E8 0E E0 50 DF 20 EC 0F E0 4D DF
+R 00 00 00 00
+T 6A 01 2B E1 00 E1 4A DF 27 E0 01 E1 47 DF 22 27
+R 00 00 00 00
+T 78 01 02 E1 44 DF 20 E9 03 E1 41 DF 2F E0 04 E1
+R 00 00 00 00
+T 86 01 3E DF 28 ED 05 E1 3B DF 2C E0 06 E1 38 DF
+R 00 00 00 00
+T 94 01 21 E0 07 E1 35 DF 20 EC 08 E1 32 DF 22 27
+R 00 00 00 00
+T A2 01 09 E1 2F DF 20 EC 0A E1 2C DF 00 D0 08 95
+R 00 00 00 00 82 0C 04 00
+T B0 01 20 91 00 00 08 E0 26 DF 08 95
+R 00 00 00 00 02 04 07 00

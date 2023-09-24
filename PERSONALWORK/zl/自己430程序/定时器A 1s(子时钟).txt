@@ -1,0 +1,39 @@
+/********************************************************* 
+用定时器A1，定时器A利用子系统时钟定时1S.
+*********************************************************/
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned char
+void port_init(void)               //端口初始化
+{
+   P1DIR |= (BIT0+BIT6);
+   P1OUT |= (BIT0+BIT6);
+}
+void int_WDT(void)                 //看门狗初始化
+{
+   WDTCTL = WDTPW + WDTHOLD;       // Stop watchdog
+}
+void int_Time_A(void)              //定时器A初始化
+{
+  BCSCTL2 |=DIVS_3;                //子系统8分频
+  CCTL0 = CCIE;                    //CCR0 interrupt enabled
+  TACTL = TASSEL_2 +ID_3+ MC_1;    // SMCLK,TA 8分频，upmode
+  CCR0 = 12500;                    //定时1s t=800k/8/8*12500=1S
+}
+void main( void )                  //主函数
+{     
+   port_init();                    // I/O口设置
+   int_WDT();                      //看门狗设置
+   int_Time_A();                   //定时器A设置
+   _EINT();                        // 开全局中断
+//   while(1)
+//   { 
+   LPM0;                           //进入低功耗模式0
+//   }
+ }
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void Timer_A (void)
+{
+  P1OUT ^= (BIT0+BIT6);             //小灯取反
+  TACTL |= TACLR;                   //计数器清零
+}

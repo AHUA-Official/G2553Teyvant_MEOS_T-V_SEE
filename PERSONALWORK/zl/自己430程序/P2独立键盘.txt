@@ -1,0 +1,94 @@
+/********************************************************* 
+利用P2低四位引脚出现下降沿信号则触发中断，
+将系统从LPM4唤醒，使灯亮灭。
+从该实例学到：可以用P2的中断来唤醒低功耗LPM4.
+*********************************************************/
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned char
+#define key1 0x01
+#define key2 0x02
+#define key3 0x04
+#define key4 0x08
+#define key_1 0x01     //定义返回键值1
+#define key_2 0x02     //定义返回键值2
+#define key_3 0x04     //定义返回键值3
+#define key_4 0x08     //定义返回键值4
+void key_process_0(void);
+void key_process_1(void);
+void key_process_2(void);
+void key_process_3(void);
+void key_check (void);
+uchar key_value;                   //定义键值全局变量
+void port_init(void)               //端口初始化
+{
+    P1DIR |= BIT0+BIT6;            // 设置P1.1和P1.6为输出
+    P1OUT &=~(BIT0+BIT6);          //关LED
+    P2OUT|=BIT0+BIT1+BIT2+BIT3;    //P2.0-P2.3上拉电阻
+}  
+void int_WDT(void)                 //看门狗设置
+{
+   WDTCTL = WDTPW + WDTHOLD;       // Stop watchdog
+}
+void int_P(void)                  
+{
+    P2REN|=BIT0+BIT1+BIT2+BIT3;      //使能P2.0-P2.3的上拉电阻
+    P2IE |= BIT0+BIT1+BIT2+BIT3;     // P2.0-P2.3 IO口中断使能
+    P2IES |= BIT0+BIT1+BIT2+BIT3;    // P2.0-P2.3 IO口边沿触发中断方式设置
+    P2IFG &= ~(key1+key2+key3+key4); // P2.0-P2.2 IO口中断标志位清除
+}
+void main( void )                    //主函数
+{     
+   port_init();                      // I/O口设置
+   int_WDT();                        //看门狗初始化
+   int_P();                     
+   _EINT();                          // 开全局中断
+//在这继续添加你的代码
+   while(1)
+   { 
+     LPM4;//进入低功耗模式4
+   }
+ }
+//P2中断服务程序
+#pragma vector=PORT2_VECTOR
+__interrupt void Port_2(void)
+{
+  if((P2IFG & 0x0f)!=0x0f )
+  __delay_cycles(10000);
+      if((P2IFG & 0x0f)!=0x0f )
+      { 
+         key_value=P2IFG;
+         switch (key_value)  //对键值进行处理.采switch查询
+         {
+             case key_1:  key_process_0() ;      //调用键处理程序1
+             break;
+             case key_2:  key_process_1();      //调用键处理程序2 
+             break;
+             case key_3:  key_process_2();      //调用键处理程序3
+             break;
+             case key_4:  key_process_3();      //调用键处理程序3
+             break;
+             default:  
+             break;
+           }
+         //P2IE |= BIT0+BIT1+BIT2;      // P2.0-P2.2 IO口中断使能(紧急情况)
+         P2IFG &= ~(key1+key2+key3+key4);  // P2.0-P2.2 IO口中断标志位清除
+   }
+
+}
+void key_process_0(void)          //值处理,用户可以自己修改...
+{
+     P1OUT = BIT0 ;
+}
+void key_process_1(void)        //值处理,用户可以自己修改...
+{
+     P1OUT = BIT6;
+}
+void key_process_2(void)      //值处理,用户可以自己修改...
+{
+     P1OUT = BIT0 +BIT6;
+} 
+void key_process_3(void)      //值处理,用户可以自己修改...
+{
+     P1OUT &= ~(BIT0 +BIT6);
+} 

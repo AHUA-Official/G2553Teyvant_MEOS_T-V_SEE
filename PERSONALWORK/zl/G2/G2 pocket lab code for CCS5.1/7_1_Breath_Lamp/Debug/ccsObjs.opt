@@ -1,0 +1,1 @@
+"./src/TA_PWM.obj" "./src/Breath_Lamp_Global.obj" "./src/Breath_Lamp_Event.obj" "./main.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 

@@ -1,0 +1,122 @@
+XL
+H 1 areas 5 global symbols
+M DAC.c
+S push_gset2 Ref0000
+S pop_gset2 Ref0000
+S _Bright Ref0000
+A text size 62 flags 0
+dbfile D:\OLED\DAC.c
+dbfunc e InitDAC 0 fV
+dbline FFFFFFFF 0
+dbline 12 0
+dbline 13 0
+dbline FFFFFFFE 6
+dbline 0 6
+dbfunc e WriteDA 8 fV
+dbsym r cnt 14 c
+dbsym r temp 16 c
+dbsym r bright 10 c
+dbline FFFFFFFF A
+dbline 17 A
+dbline 19 A
+dbline 1B C
+dbline 1B C
+dbline 1B E
+dbline 1B E
+dbline 1C E
+dbline 1C E
+dbline 1C 10
+dbline 1C 10
+dbline 1D 10
+dbline 1D 10
+dbline 1D 12
+dbline 1D 12
+dbline 1E 12
+dbline 1F 18
+dbline 21 1C
+dbline 22 1C
+dbline 22 1C
+dbline 22 1E
+dbline 22 1E
+dbline 23 1E
+dbline 23 1E
+dbline 23 20
+dbline 23 20
+dbline 24 20
+dbline 24 20
+dbline 24 22
+dbline 24 22
+dbline 25 22
+dbline 26 24
+dbline 26 24
+dbline 26 26
+dbline 26 26
+dbline 27 26
+dbline 28 28
+dbline 29 2A
+dbline 29 2A
+dbline 29 2C
+dbline 29 2C
+dbline 2A 2C
+dbline 20 2C
+dbline 2C 32
+dbline 2D 3A
+dbline 2E 3E
+dbline 30 42
+dbline 31 42
+dbline 31 42
+dbline 31 44
+dbline 31 44
+dbline 32 44
+dbline 32 44
+dbline 32 46
+dbline 32 46
+dbline 33 46
+dbline 33 46
+dbline 33 48
+dbline 33 48
+dbline 34 48
+dbline 35 4A
+dbline 35 4A
+dbline 35 4C
+dbline 35 4C
+dbline 36 4C
+dbline 37 4E
+dbline 38 50
+dbline 38 50
+dbline 38 52
+dbline 38 52
+dbline 39 52
+dbline 2F 52
+dbline 3B 58
+dbline 3B 58
+dbline 3B 5A
+dbline 3B 5A
+dbline 3C 5A
+dbline 3C 5A
+dbline 3C 5C
+dbline 3C 5C
+dbline 3D 5C
+dbline 3D 5C
+dbline 3D 5E
+dbline 3D 5E
+dbline FFFFFFFE 5E
+dbline 0 60
+S _InitDAC Def0000
+S _WriteDA Def0008
+T 00 00 00 91 00 00 01 D0 08 95
+R 00 00 00 00 02 04 02 00
+T 08 00 00 D0 66 27 20 9A 21 9A 22 9A 60 2F 62 95
+R 00 00 00 00 82 02 00 00
+T 16 00 6F 70 48 E0 08 C0 28 98 29 9A 2A 98 67 FD
+R 00 00 00 00
+T 24 00 2A 9A 66 0F 4A 95 29 98 22 24 24 16 A8 F3
+R 00 00 00 00
+T 32 00 80 2F 8F 70 82 95 08 2F 68 2F 6F 60 48 E0
+R 00 00 00 00
+T 40 00 08 C0 28 98 29 9A 2A 98 67 FD 2A 9A 66 0F
+R 00 00 00 00
+T 4E 00 4A 95 29 98 22 24 24 16 A8 F3 28 9A 29 9A
+R 00 00 00 00
+T 5C 00 2A 9A 00 D0 08 95
+R 00 00 00 00 82 04 01 00

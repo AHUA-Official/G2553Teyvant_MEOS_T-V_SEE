@@ -1,0 +1,375 @@
+                        .module key.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile D:\OLED\key.c
+ 0000                   .dbfunc e key _key fc
+ 0000           ;           keyT -> R20
+ 0000           ;         ADBuf2 -> y+2
+                        .even
+ 0000           _key::
+ 0000 00D0              rcall push_gset1
+ 0002 2497              sbiw R28,4
+ 0004                   .dbline -1
+ 0004                   .dbline 16
+ 0004           ; //ICC-AVR application builder : 2006-02-12 14:00:00
+ 0004           ; // Target : ATmega48
+ 0004           ; // Crystal: 1.000Mhz
+ 0004           ; // Author:  jackyan
+ 0004           ; 
+ 0004           ; #include "iom48v.h"
+ 0004           ; #include "macros.h"
+ 0004           ; #include "Defs.h"
+ 0004           ; #include "I2C.h"
+ 0004           ; #include "var.h"
+ 0004           ; #include "eeprom.h"
+ 0004           ; 
+ 0004           ; extern uword ADRead(ubyte chal);
+ 0004           ; 
+ 0004           ; ubyte key(void)
+ 0004           ; {
+ 0004                   .dbline 18
+ 0004           ;       ubyte keyT;
+ 0004           ;       uword ADBuf2=0;
+ 0004 2224              clr R2
+ 0006 3324              clr R3
+ 0008 3B82              std y+3,R3
+ 000A 2A82              std y+2,R2
+ 000C                   .dbline 20
+ 000C           ;       
+ 000C           ;       ADBuf2=ADRead(3);
+ 000C 03E0              ldi R16,3
+ 000E 00D0              rcall _ADRead
+ 0010 1B83              std y+3,R17
+ 0012 0A83              std y+2,R16
+ 0014                   .dbline 22
+ 0014           ; 
+ 0014           ;       keyT=NULL_KEY;
+ 0014 4FEF              ldi R20,255
+ 0016                   .dbline 24
+ 0016           ; 
+ 0016           ;       if(((0x0000<ADBuf2)||(0x0000==ADBuf2))&&(ADBuf2<0x0030))
+ 0016 0030              cpi R16,0
+ 0018 0107              cpc R16,R17
+ 001A 31F4              brne L4
+ 001C           X0:
+ 001C 2A80              ldd R2,y+2
+ 001E 3B80              ldd R3,y+3
+ 0020 2220              tst R2
+ 0022 49F4              brne L2
+ 0024 3320              tst R3
+ 0026 39F4              brne L2
+ 0028           X1:
+ 0028           L4:
+ 0028 8A81              ldd R24,y+2
+ 002A 9B81              ldd R25,y+3
+ 002C 8033              cpi R24,48
+ 002E E0E0              ldi R30,0
+ 0030 9E07              cpc R25,R30
+ 0032 08F4              brsh L2
+ 0034                   .dbline 25
+ 0034           ;                       keyT=Bright_Dw;
+ 0034 42E0              ldi R20,2
+ 0036           L2:
+ 0036                   .dbline 27
+ 0036           ;       
+ 0036           ;       if((0x00a0<ADBuf2)&&(ADBuf2<0x0120))
+ 0036 2A80              ldd R2,y+2
+ 0038 3B80              ldd R3,y+3
+ 003A 80EA              ldi R24,160
+ 003C 90E0              ldi R25,0
+ 003E 8215              cp R24,R2
+ 0040 9305              cpc R25,R3
+ 0042 30F4              brsh L5
+ 0044 C101              movw R24,R2
+ 0046 8032              cpi R24,32
+ 0048 E1E0              ldi R30,1
+ 004A 9E07              cpc R25,R30
+ 004C 08F4              brsh L5
+ 004E                   .dbline 28
+ 004E           ;                       keyT=Bright_Up;
+ 004E 41E0              ldi R20,1
+ 0050           L5:
+ 0050                   .dbline 30
+ 0050           ;       
+ 0050           ;       if((0x01f0<ADBuf2)&&(ADBuf2<0x0230))
+ 0050 2A80              ldd R2,y+2
+ 0052 3B80              ldd R3,y+3
+ 0054 80EF              ldi R24,496
+ 0056 91E0              ldi R25,1
+ 0058 8215              cp R24,R2
+ 005A 9305              cpc R25,R3
+ 005C 30F4              brsh L7
+ 005E C101              movw R24,R2
+ 0060 8033              cpi R24,48
+ 0062 E2E0              ldi R30,2
+ 0064 9E07              cpc R25,R30
+ 0066 08F4              brsh L7
+ 0068                   .dbline 31
+ 0068           ;                       keyT=Contrast_Up;
+ 0068 43E0              ldi R20,3
+ 006A           L7:
+ 006A                   .dbline 33
+ 006A           ;       
+ 006A           ;       if((0x02d0<ADBuf2)&&(ADBuf2<0x0320))
+ 006A 2A80              ldd R2,y+2
+ 006C 3B80              ldd R3,y+3
+ 006E 80ED              ldi R24,720
+ 0070 92E0              ldi R25,2
+ 0072 8215              cp R24,R2
+ 0074 9305              cpc R25,R3
+ 0076 30F4              brsh L9
+ 0078 C101              movw R24,R2
+ 007A 8032              cpi R24,32
+ 007C E3E0              ldi R30,3
+ 007E 9E07              cpc R25,R30
+ 0080 08F4              brsh L9
+ 0082                   .dbline 34
+ 0082           ;                       keyT=Contrast_Dw;
+ 0082 44E0              ldi R20,4
+ 0084           L9:
+ 0084                   .dbline 36
+ 0084           ;       
+ 0084           ;       if((0x0350<ADBuf2)&&(ADBuf2<0x0380))
+ 0084 2A80              ldd R2,y+2
+ 0086 3B80              ldd R3,y+3
+ 0088 80E5              ldi R24,848
+ 008A 93E0              ldi R25,3
+ 008C 8215              cp R24,R2
+ 008E 9305              cpc R25,R3
+ 0090 30F4              brsh L11
+ 0092 C101              movw R24,R2
+ 0094 8038              cpi R24,128
+ 0096 E3E0              ldi R30,3
+ 0098 9E07              cpc R25,R30
+ 009A 08F4              brsh L11
+ 009C                   .dbline 37
+ 009C           ;                       keyT=ModeKey;
+ 009C 48E0              ldi R20,8
+ 009E           L11:
+ 009E                   .dbline 39
+ 009E           ;       
+ 009E           ;       EEPROM_WRITE(0x20, ADBuf2);             // test ads value of key
+ 009E 82E0              ldi R24,2
+ 00A0 90E0              ldi R25,0
+ 00A2 9983              std y+1,R25
+ 00A4 8883              std y+0,R24
+ 00A6 9E01              movw R18,R28
+ 00A8 2E5F              subi R18,254  ; offset = 2
+ 00AA 3F4F              sbci R19,255
+ 00AC 00E2              ldi R16,32
+ 00AE 10E0              ldi R17,0
+ 00B0 00D0              rcall _EEPROMWriteBytes_extIO
+ 00B2                   .dbline 40
+ 00B2           ;       return keyT;
+ 00B2 042F              mov R16,R20
+ 00B4                   .dbline -2
+ 00B4           L1:
+ 00B4 2496              adiw R28,4
+ 00B6 00D0              rcall pop_gset1
+ 00B8                   .dbline 0 ; func end
+ 00B8 0895              ret
+ 00BA                   .dbsym r keyT 20 c
+ 00BA                   .dbsym l ADBuf2 2 i
+ 00BA                   .dbend
+ 00BA                   .dbfunc e keyLog _keyLog fV
+                        .even
+ 00BA           _keyLog::
+ 00BA                   .dbline -1
+ 00BA                   .dbline 46
+ 00BA           ; }
+ 00BA           ; 
+ 00BA           ; 
+ 00BA           ; 
+ 00BA           ; void keyLog(void)
+ 00BA           ; {
+ 00BA                   .dbline 47
+ 00BA           ;       KeyTemp=key();
+ 00BA A2DF              rcall _key
+ 00BC 00930000          sts _KeyTemp,R16
+ 00C0                   .dbline 49
+ 00C0           ;       
+ 00C0           ;       if(KeyBuf==KeyTemp)     // 去抖动，连续两次读键相同，认为按键状态有效
+ 00C0 30900000          lds R3,_KeyBuf
+ 00C4 3016              cp R3,R16
+ 00C6 09F0              breq X2
+ 00C8 4CC0              rjmp L14
+ 00CA           X2:
+ 00CA                   .dbline 50
+ 00CA           ;               {
+ 00CA                   .dbline 51
+ 00CA           ;               KeyValue=KeyBuf;        //      取按键值
+ 00CA 232C              mov R2,R3
+ 00CC 20920000          sts _KeyValue,R2
+ 00D0                   .dbline 52
+ 00D0           ;               KeyTemp=0;                      //      清除本次扫描结果
+ 00D0 2224              clr R2
+ 00D2 20920000          sts _KeyTemp,R2
+ 00D6                   .dbline 53
+ 00D6           ;               if(KeyValue==KeyValue2)         // 读取的按键值和先前的值相同，是同一按键，为连击。 
+ 00D6 20900000          lds R2,_KeyValue2
+ 00DA 3214              cp R3,R2
+ 00DC 69F5              brne L16
+ 00DE                   .dbline 54
+ 00DE           ;                       {
+ 00DE                   .dbline 55
+ 00DE           ;                       if(chk(Flag,bitKeyContinue))            // 允许连击
+ 00DE 20900000          lds R2,_Flag
+ 00E2 22FE              sbrs R2,2
+ 00E4 18C0              rjmp L18
+ 00E6                   .dbline 56
+ 00E6           ;                               {
+ 00E6                   .dbline 57
+ 00E6           ;                               if(KeepKeyCnt!=0)
+ 00E6 20900000          lds R2,_KeepKeyCnt
+ 00EA 2220              tst R2
+ 00EC 51F0              breq L20
+ 00EE                   .dbline 58
+ 00EE           ;                                       {
+ 00EE                   .dbline 59
+ 00EE           ;                                       clr(Flag,keybhits);             // 连击计数未到
+ 00EE                   .dbline 59
+ 00EE 80910000          lds R24,_Flag
+ 00F2 877F              andi R24,247
+ 00F4 80930000          sts _Flag,R24
+ 00F8                   .dbline 59
+ 00F8                   .dbline 59
+ 00F8                   .dbline 60
+ 00F8           ;                                       KeepKeyCnt--;           // 连击计数器
+ 00F8 822D              mov R24,R2
+ 00FA 8150              subi R24,1
+ 00FC 80930000          sts _KeepKeyCnt,R24
+ 0100                   .dbline 61
+ 0100           ;                                       }
+ 0100 44C0              rjmp L15
+ 0102           L20:
+ 0102                   .dbline 63
+ 0102           ;                               else //(KeepKeyCnt==0)//&&(bitADError==0)) // AD 异常下，锁定按键
+ 0102           ;                                       { 
+ 0102                   .dbline 64
+ 0102           ;                                       chKeyVal=KeyValue;      //      连击按键有效
+ 0102 20900000          lds R2,_KeyValue
+ 0106 20920000          sts _chKeyVal,R2
+ 010A                   .dbline 65
+ 010A           ;                                       set(Flag,keybhits);             // 有按键闭合
+ 010A                   .dbline 65
+ 010A 80910000          lds R24,_Flag
+ 010E 8860              ori R24,8
+ 0110 80930000          sts _Flag,R24
+ 0114                   .dbline 65
+ 0114                   .dbline 65
+ 0114                   .dbline 66
+ 0114           ;                                       }
+ 0114                   .dbline 67
+ 0114           ;                               }
+ 0114 3AC0              rjmp L15
+ 0116           L18:
+ 0116                   .dbline 69
+ 0116           ;                       else
+ 0116           ;                               {       // 不允许连击，认为没有按键闭合
+ 0116                   .dbline 70
+ 0116           ;                               clr(Flag,keybhits);
+ 0116                   .dbline 70
+ 0116 80910000          lds R24,_Flag
+ 011A 877F              andi R24,247
+ 011C 80930000          sts _Flag,R24
+ 0120                   .dbline 70
+ 0120                   .dbline 70
+ 0120                   .dbline 71
+ 0120           ;                               clr(Flag,bitKeepKeyL);
+ 0120                   .dbline 71
+ 0120 8F7D              andi R24,223
+ 0122 80930000          sts _Flag,R24
+ 0126                   .dbline 71
+ 0126                   .dbline 71
+ 0126                   .dbline 72
+ 0126           ;                               KeepKeyCnt=255;
+ 0126 8FEF              ldi R24,255
+ 0128 80930000          sts _KeepKeyCnt,R24
+ 012C                   .dbline 73
+ 012C           ;                               clr(Flag,bitKeepKeyKeep);       // 非连击中                             
+ 012C                   .dbline 73
+ 012C 80910000          lds R24,_Flag
+ 0130 8F7E              andi R24,239
+ 0132 80930000          sts _Flag,R24
+ 0136                   .dbline 73
+ 0136                   .dbline 73
+ 0136                   .dbline 74
+ 0136           ;                               }
+ 0136                   .dbline 75
+ 0136           ;                       }
+ 0136 29C0              rjmp L15
+ 0138           L16:
+ 0138                   .dbline 77
+ 0138           ;               else
+ 0138           ;                       {       //      读取的按键与先前闭合的按键不同,有新的按键
+ 0138                   .dbline 78
+ 0138           ;                       chKeyVal=KeyValue2=KeyValue;            
+ 0138 20900000          lds R2,_KeyValue
+ 013C 20920000          sts _KeyValue2,R2
+ 0140 20920000          sts _chKeyVal,R2
+ 0144                   .dbline 79
+ 0144           ;                       KeepKeyCnt=255;
+ 0144 8FEF              ldi R24,255
+ 0146 80930000          sts _KeepKeyCnt,R24
+ 014A                   .dbline 80
+ 014A           ;                       clr(Flag,bitKeyContinue);
+ 014A                   .dbline 80
+ 014A 80910000          lds R24,_Flag
+ 014E 8B7F              andi R24,251
+ 0150 80930000          sts _Flag,R24
+ 0154                   .dbline 80
+ 0154                   .dbline 80
+ 0154                   .dbline 81
+ 0154           ;                       set(Flag,keybhits);
+ 0154                   .dbline 81
+ 0154 8860              ori R24,8
+ 0156 80930000          sts _Flag,R24
+ 015A                   .dbline 81
+ 015A                   .dbline 81
+ 015A                   .dbline 82
+ 015A           ;                       clr(Flag,bitKeepKeyL);
+ 015A                   .dbline 82
+ 015A 8F7D              andi R24,223
+ 015C 80930000          sts _Flag,R24
+ 0160                   .dbline 82
+ 0160                   .dbline 82
+ 0160                   .dbline 83
+ 0160           ;                       }
+ 0160                   .dbline 84
+ 0160           ;               }
+ 0160 14C0              rjmp L15
+ 0162           L14:
+ 0162                   .dbline 87
+ 0162                   .dbline 88
+ 0162 20900000          lds R2,_KeyTemp
+ 0166 20920000          sts _KeyBuf,R2
+ 016A                   .dbline 89
+ 016A 8FEF              ldi R24,255
+ 016C 80930000          sts _chKeyVal,R24
+ 0170                   .dbline 90
+ 0170 80930000          sts _KeepKeyCnt,R24
+ 0174                   .dbline 91
+ 0174                   .dbline 91
+ 0174 80910000          lds R24,_Flag
+ 0178 877F              andi R24,247
+ 017A 80930000          sts _Flag,R24
+ 017E                   .dbline 91
+ 017E                   .dbline 91
+ 017E                   .dbline 92
+ 017E                   .dbline 92
+ 017E 8F7E              andi R24,239
+ 0180 80930000          sts _Flag,R24
+ 0184                   .dbline 92
+ 0184                   .dbline 92
+ 0184                   .dbline 93
+ 0184                   .dbline 93
+ 0184 8F7D              andi R24,223
+ 0186 80930000          sts _Flag,R24
+ 018A                   .dbline 93
+ 018A                   .dbline 93
+ 018A                   .dbline 94
+ 018A           L15:
+ 018A                   .dbline -2
+ 018A           L13:
+ 018A                   .dbline 0 ; func end
+ 018A 0895              ret
+ 018C                   .dbend

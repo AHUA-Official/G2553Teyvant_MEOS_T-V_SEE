@@ -1,0 +1,39 @@
+/********************************************************* 
+   用外部低频时钟源（LFXT1CLK）作为辅助时钟，
+   利用看门狗定时器在低功耗LPM3模式(ACLK活动)下，以实现
+   P1.0 P1.6小灯的闪烁(T=1s)
+*********************************************************/
+#include <msp430g2553.h>           // msp430头文件
+#define uint unsigned int          //无符号整数型宏定义
+#define uchar unsigned char        //无符号字符型宏定义
+void port_init(void)               //端口初始化子函数
+{
+   P1DIR |= (BIT0+BIT6);
+   P1OUT |= (BIT0+BIT6);
+}
+void int_WDT(void)                 //看门狗设置
+{
+   WDTCTL = WDT_ADLY_1000;         //看门狗定时1000ms（辅助时钟）
+   IE1 |=WDTIE;                    //开看门狗中断
+}
+void init_devices(void)            //初始化配置子程序
+{
+   port_init();                    //端口初始化
+   int_WDT();                      //看门狗初始化
+   _EINT();                        //开全局中断
+}
+//主函数
+void main( void )
+{     
+   init_devices();                 //主函数初始化
+   while(1)                        //在这继续添加你的代码
+   { 
+     P1OUT=(BIT0+BIT6);
+     LPM3;
+   }
+}
+#pragma vector=WDT_VECTOR          //看门狗中断服务程序
+__interrupt void watchdog_time (void)
+{
+ P1OUT ^= (BIT0+BIT6);
+}

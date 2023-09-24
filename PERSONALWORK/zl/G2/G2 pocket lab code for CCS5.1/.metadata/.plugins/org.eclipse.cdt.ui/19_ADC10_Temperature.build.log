@@ -1,0 +1,22 @@
+
+**** Build of configuration Debug for project 19_ADC10_Temperature ****
+
+"C:\\ti\\ccsv5\\utils\\bin\\gmake" -k all 
+'Building file: ../src/I2C.c'
+'Invoking: MSP430 Compiler'
+"C:/ti/ccsv5/tools/compiler/msp430_4.2.4/bin/cl430" -vmsp --abi=coffabi -g --include_path="C:/ti/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/rainf_000/Desktop/G2 pocket lab code for CCS5.1/19_ADC10_Temperature/src" --include_path="C:/ti/ccsv5/tools/compiler/msp430_4.2.4/include" --define=__MSP430G2553__ --diag_warning=225 --display_error_number --printf_support=minimal --preproc_with_compile --preproc_dependency="src/I2C.pp" --obj_directory="src"  "../src/I2C.c"
+'Finished building: ../src/I2C.c'
+' '
+'Building file: ../src/TCA6416A.c'
+'Invoking: MSP430 Compiler'
+"C:/ti/ccsv5/tools/compiler/msp430_4.2.4/bin/cl430" -vmsp --abi=coffabi -g --include_path="C:/ti/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/rainf_000/Desktop/G2 pocket lab code for CCS5.1/19_ADC10_Temperature/src" --include_path="C:/ti/ccsv5/tools/compiler/msp430_4.2.4/include" --define=__MSP430G2553__ --diag_warning=225 --display_error_number --printf_support=minimal --preproc_with_compile --preproc_dependency="src/TCA6416A.pp" --obj_directory="src"  "../src/TCA6416A.c"
+'Finished building: ../src/TCA6416A.c'
+' '
+'Building target: 19_ADC10_Temperature.out'
+'Invoking: MSP430 Linker'
+"C:/ti/ccsv5/tools/compiler/msp430_4.2.4/bin/cl430" -vmsp --abi=coffabi -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --printf_support=minimal -z -m"19_ADC10_Temperature.map" --stack_size=80 --heap_size=80 -i"C:/ti/ccsv5/ccs_base/msp430/include" -i"C:/ti/ccsv5/tools/compiler/msp430_4.2.4/lib" -i"C:/ti/ccsv5/tools/compiler/msp430_4.2.4/include" --reread_libs --warn_sections --xml_link_info="19_ADC10_Temperature_linkInfo.xml" --rom_model -o "19_ADC10_Temperature.out"  "./src/TCA6416A.obj" "./src/LCD_128.obj" "./src/I2C.obj" "./src/HT1621.obj" "./main.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 
+<Linking>
+'Finished building target: 19_ADC10_Temperature.out'
+' '
+
+**** Build Finished ****

@@ -1,0 +1,34 @@
+/********************************************************* 
+ ACLK和SMCLK可以通过(P1.0 P1.4)复用引脚输出，MCLK不能直接输出体现
+ ACLK利用内部低频振荡器12KHZ，SMCLK利用DCO数字振荡器1MHZ。
+*********************************************************/
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned char
+void port_init(void)               //端口初始化
+{
+  P1DIR |= BIT0+BIT4+BIT5;        
+  P1SEL |= BIT0+BIT4;              // P1.0,4 ACLK/VLO, SMCLK/DCO output
+}
+void int_WDT(void)                 //看门狗初始化
+{
+   WDTCTL = WDTPW + WDTHOLD;       // Stop watchdog
+}
+void int_Clock(void)               //定时器A初始化
+{
+  BCSCTL3 |= LFXT1S_2;             //ACLK=VLO
+  BCSCTL1 = CALBC1_1MHZ;           //DCO数字振荡器=1MHZ
+  DCOCTL  = CALBC1_1MHZ;           //DCO数字振荡器=1MHZ 
+}
+void main( void )                  //主函数
+{     
+   port_init();                    // I/O口设置
+   int_WDT();                      //看门狗设置
+   int_Clock();                    //时钟设置
+ while(1)
+  {
+   P1OUT |= BIT5;    	           //通过开关P1.5来体现MCLK                              
+   P1OUT &= ~BIT5;                 //这两条指令的周期大概为SMCLK的1/10
+  }
+}
+

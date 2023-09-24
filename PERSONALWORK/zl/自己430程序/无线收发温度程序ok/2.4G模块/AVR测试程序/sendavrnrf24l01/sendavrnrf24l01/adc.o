@@ -1,0 +1,50 @@
+XL
+H 1 areas 4 global symbols
+M adc.c
+S push_gset1 Ref0000
+S pop_gset1 Ref0000
+A text size 60 flags 0
+dbfile D:\OLED\adc.c
+dbfunc e InitADC 0 fV
+dbline FFFFFFFF 0
+dbline A 0
+dbline B 0
+dbline C 6
+dbline D C
+dbline E 10
+dbline F 14
+dbline FFFFFFFE 1C
+dbline 0 1C
+dbfunc e ReadADC 1E fI
+dbsym r i 14 I
+dbsym r channel 10 c
+dbline FFFFFFFF 20
+dbline 13 20
+dbline 16 20
+dbline 18 2A
+dbline 1A 34
+dbline 1A 34
+dbline 1C 3C
+dbline 1E 46
+dbline 1F 4C
+dbline 21 5A
+dbline FFFFFFFE 5C
+dbline 0 5E
+S _ReadADC Def001E
+S _InitADC Def0000
+T 00 00 22 24 20 92 7A 00 83 E4 80 93 7C 00 80 E8
+R 00 00 00 00
+T 0E 00 80 BF 80 93 7A 00 20 92 78 00 20 92 79 00
+R 00 00 00 00
+T 1C 00 08 95
+R 00 00 00 00
+T 1E 00 00 D0 20 90 7C 00 20 2A 20 92 7C 00 80 91
+R 00 00 00 00 82 02 00 00
+T 2C 00 7A 00 80 64 80 93 7A 00 20 90 7A 00 24 FE
+R 00 00 00 00
+T 3A 00 FC CF 80 91 7A 00 80 61 80 93 7A 00 40 91
+R 00 00 00 00
+T 48 00 78 00 55 27 20 90 79 00 33 24 32 2C 22 24
+R 00 00 00 00
+T 56 00 42 0D 53 1D 8A 01 00 D0 08 95
+R 00 00 00 00 82 08 01 00

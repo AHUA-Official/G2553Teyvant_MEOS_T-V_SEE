@@ -1,0 +1,113 @@
+/**************************************************************
+    其实用74HC595也是一种动态显示，所以必须利用循环才行。
+    运用74HC595串入并出的方式显示8位共阳数码管,本实验是用P1.0,1,2
+    P1.0接74HC595的12 脚，存储时钟(STCP)
+    P1.1接74HC595的14 脚，串行数据输入脚(DS)
+    P1.2接74HC595的11 脚，移位时钟(SHCP)
+
+*************************************************************/
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned char
+//以下是74HC595所需的宏定义
+#define HC595_Store_H P1OUT |= BIT0
+#define HC595_Store_L P1OUT &= ~ BIT0
+#define HC595_A_H     P1OUT |= BIT1
+#define HC595_A_L     P1OUT &= ~ BIT1
+#define HC595_Shift_H P1OUT |= BIT2
+#define HC595_Shift_L P1OUT &= ~ BIT2
+//以上是74HC595所需的宏定义
+unsigned char const LedData[]= {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xF8,    
+                                0x80,0x90,0x88,0x83,0xc6,0xa1,0x86,0x8e, //共阳数码管段选数组(0-F）
+                                0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,    
+                                0x00,0x10,0x08,0x03,0x46,0x21,0x06,0x0e,};//共阳数码管(带小数点)段选数组(0-F）
+unsigned char const LedPos[] = {0x01,0x02,0x04,0x08,
+         0x10,0x20,0x40,0x80};                   //数码管位选数组，分别选通每一位数码管
+/**********************************************
+                函数声明
+**********************************************/
+void init_devices(void);
+void port_init(void);
+//以下是74HC595所需的函数定义
+void HC595shift(void);
+void HC595store(void);
+void HC595send(uchar x);
+void display(uchar pos,uchar dat); //pos则是表示选通哪一位，dat则是表示显示什么数据
+//以上是74HC595所需的函数定义
+void main( void )                //主函数
+{
+   uchar n=0;
+   init_devices();
+   while(1)
+     {
+      for(n=1;n<9;n++)          //循环显示12345678，八次
+          {
+             display(n-1,n);    //显示函数调用
+//           display(n-1,n+16); //所有的位都显示小数点，
+                                //其实当显示小数点时，
+                                //只需个位显示就行，即调用时，
+                                //就要调用数组LedData[]的后16个数
+                                //即n+16
+           }
+     }
+}
+void init_devices(void)
+{
+   WDTCTL = WDTPW + WDTHOLD;    // Stop watchdog
+   port_init();
+}
+void port_init(void)           //端口初始化
+{
+   P1DIR |= (BIT0+BIT1+BIT2);
+}
+void HC595send(uchar x)
+{
+   uchar n,temp;
+   for(n=0;n<8;n++)	//一个字节要分8次写入
+   {
+      temp=x&0x80;	//记住一定要先写最高位
+      if(temp!=0)	//判断是否不等于0
+      {
+         HC595_A_H;     //P1.1赋为1
+         HC595shift();	//使寄存器移位
+      }
+      else		//等于0
+      {
+         HC595_A_L;     //P1.1赋为0
+         HC595shift();  //使寄存器移位
+      }	 
+      x<<=1;		//数据左移一位，那么下一个循环将是获取
+                        //第7位的数据，跟着是第6位,第5位,,,第1位
+                        //最后把所有数据都移入HC595
+    }
+}
+/***************************************
+ 字节写入存储寄存器，并且送往输出端口，数据刷新输出
+***************************************/
+void HC595store(void) 
+{
+   HC595_Store_L;   //先将存储时钟置低                  
+   HC595_Store_H;   //将存储时钟置高产生一个上升沿，就会把一个字节
+                    //写入存储寄存器，即将74HC595 的数据刷新输出。
+} 
+/**************************************
+           寄存器移位函数
+**************************************/
+void HC595shift(void) 
+{
+   HC595_Shift_L;  //要将时钟线置低                 
+   HC595_Shift_H;  //把时钟线拉高，则是上升沿，就会把进行寄存器移位操作
+}
+/*************************************
+        显示函数，在某位显示某数据
+*************************************/
+void display(uchar pos,uchar dat) 
+{
+   HC595send(LedPos[pos]);   //一定要先把位选数据送入上级HC595 
+                             //当把段选数据送入上级HC595时，
+                             //位选数据则会移到下级HC595中
+   HC595send(LedData[dat]);  //把数据送入下级HC595时，
+                             //位选数据则会移到上级HC595中
+   HC595store(); 	     //把数据显示出来
+   
+}

@@ -1,0 +1,185 @@
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned 
+#define BIAS    0x4A  //0b1000 0100 1010 1/3duty 3com
+#define SYSDIS  0X00  //0b1000 0000 0000 关振系统荡器和LCD偏压发生器
+#define SYSEN   0X02  //0b1000 0000 0010 打开系统振荡器
+#define LCDOFF  0X04  //0b1000 0000 0100 关LCD偏压
+#define LCDON   0X06  //0b1000 0000 0110 打开LCD偏压
+#define XTAL    0x28  //0b1000 0010 1000 外部接时钟
+#define RC256   0X30  //0b1000 0011 0000 内部时钟
+#define TONEON  0X12 //0b1000 0001 0010 打开声音输出
+#define TONEOFF 0X10 //0b1000 0001 0000 关闭声音输出
+#define WDTDIS  0X0A  //0b1000 0000 1010 禁止看门狗
+#define HT1621_DAT_H P1OUT|=BIT0
+#define HT1621_DAT_L P1OUT&=~BIT0
+#define HT1621_CS_H  P1OUT|=BIT1
+#define HT1621_CS_L  P1OUT&=~BIT1
+#define HT1621_WR_H  P1OUT|=BIT2
+#define HT1621_WR_L  P1OUT&=~BIT2
+uchar Ht1621Tab[]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+void port_init(void)           //端口初始化
+{
+  P1DIR |=BIT0+BIT1+BIT2; 
+  
+}
+void int_Clock(void)               //定时器A初始化
+{
+  BCSCTL1 = CALBC1_1MHZ;           //DCO数字振荡器=1MHZ
+  DCOCTL  = CALBC1_1MHZ;           //DCO数字振荡器=1MHZ 
+}
+void Delay_us(uint us)           // 延时us  前提是f=1MHZ
+{    
+  uint i;
+  for(i=0;i<us;i++)
+  __delay_cycles(1);      
+}
+void Delay_ms(uint ms)           // 延时ms  前提是f=1MHZ
+{
+  uint j;
+  for(j=0;j<ms;j++)
+  __delay_cycles(1000); 
+}
+/******************************************************
+写数据函数,cnt为传送数据位数,数据传送为低位在前
+*******************************************************/
+void Ht1621Wr_Data(uchar Data,uchar cnt)
+{
+    uchar i;
+    for (i=0;i<cnt;i++)
+     {
+        HT1621_WR_L;
+        Delay_us(1);
+        if(Data&0x80)
+          HT1621_DAT_H;
+        else
+          HT1621_DAT_L;
+        //HT1621_DAT=Data&0x80;
+        Delay_us(1);
+        HT1621_WR_H;
+        Delay_us(1);
+        Data<<=1;
+ }
+}
+/********************************************************
+函数名称：void Ht1621WrCmd(uchar Cmd)
+功能描述: HT1621命令写入函数
+全局变量：无
+参数说明：Cmd为写入命令数据
+返回说明：无
+设计 人：ZHCE
+版本：1.0
+说明：写入命令标识位100
+********************************************************/
+void Ht1621WrCmd(uchar Cmd)
+{
+HT1621_CS_L;
+Delay_us(7);
+Ht1621Wr_Data(0x80,4); //写入命令标志100
+Ht1621Wr_Data(Cmd,8); //写入命令数据
+HT1621_CS_H;
+Delay_us(7);
+}
+/********************************************************
+函数名称：void Ht1621WrOneData(uchar Addr,uchar Data)
+功能描述: HT1621在指定地址写入数据函数
+全局变量：无
+参数说明：Addr为写入初始地址，Data为写入数据
+返回说明：无
+设计 人：ZHCE
+版本：1.0
+说明：因为HT1621的数据位4位，所以实际写入数据为参数的后4位
+********************************************************/
+void Ht1621WrOneData(uchar Addr,uchar Data)
+{
+    HT1621_CS_L;
+    Ht1621Wr_Data(0xa0,3);    //写入数据标志101
+    Ht1621Wr_Data(Addr<<2,6); //写入地址数据
+    Ht1621Wr_Data(Data<<4,4); //写入数据
+    HT1621_CS_H;
+    Delay_us(1);
+}
+/********************************************************
+函数名称：void Ht1621WrAllData(uchar Addr,uchar *p,uchar cnt)
+功能描述: HT1621连续写入方式函数
+全局变量：无
+参数说明：Addr为写入初始地址，*p为连续写入数据指针，
+cnt为写入数据总数
+返回说明：无
+设计 人：ZHCE
+版本：1.0
+说明：HT1621的数据位4位，此处每次数据为8位，写入数据
+总数按8位计算
+********************************************************/
+void Ht1621WrAllData(uchar Addr,uchar *p,uchar cnt)
+{
+    uchar i;
+    HT1621_CS_L;
+    Ht1621Wr_Data(0xa0,3); //写入数据标志101
+    Ht1621Wr_Data(Addr<<2,6); //写入地址数据
+    for (i=0;i<cnt;i++)
+      {
+        Ht1621Wr_Data(*p,8); //写入数据
+        p++;
+      }
+    HT1621_CS_H;
+    Delay_us(1);
+}
+/********************************************************
+函数名称：void Ht1621_Init(void)
+功能描述: HT1621初始化
+全局变量：无
+参数说明：无
+返回说明：无
+设计 人：ZHCE
+版本：1.0
+说明：初始化后，液晶屏所有字段均显示
+********************************************************/
+void Ht1621_Init(void)
+{
+    HT1621_CS_H;
+    HT1621_WR_H;
+    HT1621_DAT_H;
+    Delay_ms(200); //延时使LCD工作电压稳定
+    Ht1621WrCmd(BIAS);
+    Ht1621WrCmd(RC256); //使用内部振荡器
+    Ht1621WrCmd(SYSDIS);
+    Ht1621WrCmd(WDTDIS);
+    Ht1621WrCmd(SYSEN);
+    Ht1621WrCmd(LCDON);
+}
+void init_devices(void)
+{
+   port_init();
+   int_Clock();
+}
+//主函数
+void main( void )
+{
+//   uchar i,j,t;
+   WDTCTL = WDTPW + WDTHOLD;// Stop watchdog
+   init_devices();
+   Ht1621_Init(); //上电初始化LCD
+   Delay_ms(1); //延时一段时间
+//在这继续添加你的代码
+ while(1)
+ {
+//  Ht1621WrAllData(0,Ht1621Tab,16);//清除1621寄存器数据，暨清屏
+/*   for (i=0;i<32;i++)
+   {
+    t=0x01;
+    for (j=0;j<4;j++)
+    {
+        Ht1621WrOneData(i,t);
+        t<<=1;
+        t++;
+        //P1_5=~P1_5;
+        P1OUT &= ~BIT3;
+//        Delay_ms(5);
+     }
+    }
+*/
+   ;
+ }
+}

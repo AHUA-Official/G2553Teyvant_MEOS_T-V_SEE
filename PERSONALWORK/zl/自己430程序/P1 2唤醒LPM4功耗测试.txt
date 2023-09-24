@@ -1,0 +1,69 @@
+/********************************************************* 
+利用P1.3，P2.3(一定外加上拉电阻)引脚出现下降沿信号则触发中断，
+将系统从LPM4唤醒，分别使P1.0 P1.6信号取反（即灯的亮灭）。
+
+
+从该实例学到：可以用P1，P2的中断来唤醒低功耗LPM4.
+*********************************************************/
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned char
+void Delay(uint ms)           // 延时 ms
+ {  
+   uint i,j;
+   for(i=0;i<ms;i++)
+   for(j=0;j<300;j++);    
+ }
+void port_init(void)               //端口初始化
+{
+   P1DIR |= (BIT0+BIT6);
+   P1OUT |= (BIT0+BIT6+BIT3);
+   P1REN |= BIT3;
+   P2OUT |= BIT3;
+   P2REN |= BIT3;
+}  
+void int_WDT(void)                 //看门狗设置
+{
+   WDTCTL = WDTPW + WDTHOLD;       // Stop watchdog
+}
+void int_P(void)                  //
+{
+  P1IE |= BIT3;
+  P1IES |= BIT3;
+  P1IFG &= ~BIT3;
+  P2IE |= BIT3;
+  P2IES |= BIT3;
+  P2IFG &= ~BIT3;
+}
+void main( void )                   //主函数
+{     
+   port_init();                    // I/O口设置
+   int_WDT();                      //看门狗初始化
+   int_P();                       //
+   _EINT();                        // 开全局中断
+//在这继续添加你的代码
+   while(1)
+   { 
+     LPM4;//进入低功耗模式4
+   }
+ }
+#pragma vector=PORT1_VECTOR  //P1低功耗模式4中断子程序
+__interrupt void port_1 (void)
+{
+  Delay(10);
+  if ((P1IN & BIT3)==0)
+  {
+     P1OUT ^= (BIT0);
+     P1IFG &= ~BIT3;
+  }
+}
+#pragma vector=PORT2_VECTOR  //P2低功耗模式4中断子程序
+__interrupt void port_2 (void)
+{
+  Delay(10);
+  if ((P2IN & BIT3)==0)
+  {
+     P1OUT ^= (BIT6);
+     P2IFG &= ~BIT3;
+  }
+}

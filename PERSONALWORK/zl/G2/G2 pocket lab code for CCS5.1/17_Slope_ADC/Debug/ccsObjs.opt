@@ -1,0 +1,1 @@
+"./src/TCA6416A/TCA6416A.obj" "./src/TCA6416A/LCD_128.obj" "./src/TCA6416A/I2C.obj" "./src/TCA6416A/HT1621.obj" "./src/Timer_A3.obj" "./src/Slope.obj" "./src/ComparatorA.obj" "./main.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 

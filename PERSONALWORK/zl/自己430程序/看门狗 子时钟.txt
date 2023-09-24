@@ -1,0 +1,44 @@
+/********************************************************* 
+   用DOCCLOCK时钟源作为子时钟，在此模式下最好
+   工作在低功耗LPM0模式下，因为在LPM0下只有CPU,MCLK
+   被禁止，SMCLK，ACLK活动。
+   利用看门狗定时器在低功耗LPM0模式下，以实现
+   P1.0 P1.6小灯的闪烁(T=32ms)
+*********************************************************/
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned char
+void port_init(void)               //端口初始化
+{
+   P1DIR |= (BIT0+BIT6);
+   P1OUT |= (BIT0+BIT6);
+}
+void int_WDT(void)                 //看门狗设置
+{
+   DCOCTL = DCO2;                  // 定义DOCCLK 时钟为f=1MHZ左右
+   BCSCTL1 |= RSEL2;               //
+   WDTCTL = WDT_MDLY_32;           //  打开看门狗（在子系统时钟下定时0.5ms）
+   IE1 |=WDTIE;                    // 开看门狗中断
+}
+void init_devices(void)            //初始化配置子程序
+{
+   port_init();                    // I/O口设置
+   int_WDT();                      //看门狗初始化
+   _EINT();                        // 开全局中断
+}
+//主函数
+void main( void )
+{     
+   init_devices();         //初始化设置
+//在这继续添加你的代码
+ while(1)
+ { 
+   P1OUT=(BIT0+BIT6);
+   LPM0;                   //进入低功耗模式0
+ }
+}
+#pragma vector=WDT_VECTOR  //低功耗模式0中断子程序
+__interrupt void watchdog_time (void)
+{
+ P1OUT ^= (BIT0+BIT6);
+}

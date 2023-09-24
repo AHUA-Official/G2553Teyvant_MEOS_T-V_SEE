@@ -1,0 +1,1 @@
+"./src/UART_init.obj" "./src/UART_Global.obj" "./src/UART_FIFO.obj" "./src/UART_Event.obj" "./main.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 

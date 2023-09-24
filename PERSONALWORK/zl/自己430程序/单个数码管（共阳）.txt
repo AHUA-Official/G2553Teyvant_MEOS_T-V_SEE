@@ -1,0 +1,36 @@
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned char
+uchar table[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,
+0x82,0xf8,0x80,0x90,0x88,0x83,0xc6,0xa1,0x86,0x8e};
+void port_init(void)           //端口初始化
+{
+   P1DIR=0XFF;
+   P1OUT=0XFF;
+}
+void Delay(uint ms)           // 延时 ms
+ {  
+    uint i,j;
+	for(i=0;i<ms;i++)
+	for(j=0;j<300;j++);    
+ }
+void init_devices(void)
+{
+  port_init();
+}
+//主函数
+void main( void )
+{
+  uchar m;
+  WDTCTL = WDTPW + WDTHOLD;// Stop watchdog
+  init_devices();
+//在这继续添加你的代码
+ while(1)
+ {
+    for(m=0;m<16;m++)
+    {
+     P1OUT=table[m];
+     Delay(1000);
+    }
+ }
+}

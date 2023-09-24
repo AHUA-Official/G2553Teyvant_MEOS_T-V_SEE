@@ -1,0 +1,183 @@
+XL
+H 1 areas D global symbols
+M I2C.c
+S push_gset1 Ref0000
+S push_gset2 Ref0000
+S pop_gset1 Ref0000
+S pop_gset2 Ref0000
+A text size D6 flags 0
+dbfile D:\OLED\I2C.c
+dbfunc e Init_I2C 0 fV
+dbline FFFFFFFF 0
+dbline 11 0
+dbline 12 0
+dbline 13 2
+dbline 15 4
+dbline 16 6
+dbline FFFFFFFE 8
+dbline 0 8
+dbfunc e I2C_Start A fV
+dbline FFFFFFFF A
+dbline 20 A
+dbline 21 A
+dbline 22 C
+dbline 24 E
+dbline 25 10
+dbline FFFFFFFE 12
+dbline 0 12
+dbfunc e I2C_Stop 14 fV
+dbline FFFFFFFF 14
+dbline 2E 14
+dbline 30 14
+dbline 32 16
+dbline 33 18
+dbline 35 1A
+dbline 36 1C
+dbline FFFFFFFE 1E
+dbline 0 1E
+dbfunc e I2C_Clock 20 fV
+dbline FFFFFFFF 20
+dbline 42 20
+dbline 43 20
+dbline 46 22
+dbline 47 24
+dbline FFFFFFFE 26
+dbline 0 26
+dbfunc e Write_I2C_Byte 28 fV
+dbsym r i 14 c
+dbsym r byte 16 c
+dbline FFFFFFFF 2C
+dbline 52 2C
+dbline 55 2C
+dbline 56 2E
+dbline 58 30
+dbline 58 34
+dbline 5B 34
+dbline 5B 3C
+dbline 5C 40
+dbline 5E 42
+dbline 60 44
+dbline 67 46
+dbline 68 48
+dbline 58 48
+dbline 58 4A
+dbline 6A 4E
+dbline 6C 52
+dbline 6D 52
+dbline 6E 54
+dbline 6F 56
+dbline 70 58
+dbline 6B 58
+dbline FFFFFFFE 5E
+dbline 0 60
+dbfunc e Read_I2C_Byte 62 fc
+dbsym r i 14 c
+dbsym r buff 16 c
+dbline FFFFFFFF 64
+dbline 7C 64
+dbline 7D 64
+dbline 7F 66
+dbline 7F 6A
+dbline 81 6A
+dbline 83 6C
+dbline 85 6E
+dbline 88 70
+dbline 8B 72
+dbline 8B 76
+dbline 8D 78
+dbline 91 7A
+dbline 92 7C
+dbline 7F 7C
+dbline 7F 7E
+dbline 96 82
+dbline 98 84
+dbline FFFFFFFE 86
+dbline 0 88
+dbfunc e I2C_Ackn 8A fc
+dbsym r Ackn 10 c
+dbline FFFFFFFF 8A
+dbline A3 8A
+dbline A4 8A
+dbline A6 8C
+dbline A7 8E
+dbline A9 90
+dbline AB 92
+dbline AB 96
+dbline AD 98
+dbline AF 9A
+dbline FFFFFFFE 9A
+dbline 0 9A
+dbfunc e I2C_Write 9C fV
+dbsym r Data 14 c
+dbsym r M_ADD 16 c
+dbline FFFFFFFF A2
+dbline B6 A2
+dbline B7 A2
+dbline B9 A4
+dbline BB A8
+dbline BD AC
+dbline BF B0
+dbline FFFFFFFE B2
+dbline 0 B4
+dbfunc e I2C_Read B6 fc
+dbsym r Temp 14 c
+dbsym r M_ADD 14 c
+dbline FFFFFFFF BA
+dbline C6 BA
+dbline C9 BA
+dbline CB BC
+dbline CD C0
+dbline CF C4
+dbline D1 C6
+dbline D3 CA
+dbline D5 CE
+dbline D7 D0
+dbline FFFFFFFE D2
+dbline 0 D4
+S _Init_I2C Def0000
+S _I2C_Stop Def0014
+S _I2C_Clock Def0020
+S _Write_I2C_Byte Def0028
+S _I2C_Write Def009C
+S _I2C_Start Def000A
+S _Read_I2C_Byte Def0062
+S _I2C_Read Def00B6
+S _I2C_Ackn Def008A
+T 00 00 3D 9A 3C 9A 45 9A 44 9A 08 95
+R 00 00 00 00
+T 0A 00 45 9A 44 9A 3C 9A 44 98 08 95
+R 00 00 00 00
+T 14 00 3C 9A 44 98 45 98 45 9A 44 9A 08 95
+R 00 00 00 00
+T 20 00 45 9A 00 00 45 98 08 95
+R 00 00 00 00
+T 28 00 00 D0 60 2F 3C 9A 45 98 44 27 0B C0 86 2F
+R 00 00 00 00 82 02 01 00
+T 36 00 80 78 80 38 11 F4 44 9A 01 C0 44 98 45 9A
+R 00 00 00 00
+T 44 00 66 0F 45 98 43 95 48 30 98 F3 4F EF 03 C0
+R 00 00 00 00
+T 52 00 4A 95 09 F4 03 C0 18 D0 00 23 D1 F7 00 D0
+R 00 00 00 00 82 0E 03 00
+T 60 00 08 95
+R 00 00 00 00
+T 62 00 00 D0 66 27 44 27 0A C0 66 0F 3C 98 45 9A
+R 00 00 00 00 82 02 01 00
+T 70 00 00 00 34 9B 01 C0 61 60 45 98 00 00 43 95
+R 00 00 00 00
+T 7E 00 48 30 A0 F3 CE DF 06 2F 00 D0 08 95
+R 00 00 00 00 82 0A 03 00
+T 8A 00 00 27 45 98 3C 98 45 9A 34 9B 01 C0 01 E0
+R 00 00 00 00
+T 98 00 45 98 08 95
+R 00 00 00 00
+T 9C 00 00 D0 42 2F 60 2F B3 DF 04 E6 C0 DF 06 2F
+R 00 00 00 00 82 02 01 00
+T AA 00 BE DF 04 2F BC DF B1 DF 00 D0 08 95
+R 00 00 00 00 82 0A 03 00
+T B6 00 00 D0 40 2F A7 DF 04 E6 B4 DF 04 2F B2 DF
+R 00 00 00 00 82 02 00 00
+T C4 00 A2 DF 05 E6 AF DF CB DF 40 2F A2 DF 04 2F
+R 00 00 00 00
+T D2 00 00 D0 08 95
+R 00 00 00 00 82 02 02 00

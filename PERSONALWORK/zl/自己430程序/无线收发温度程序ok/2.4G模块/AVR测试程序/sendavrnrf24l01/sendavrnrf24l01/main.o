@@ -1,0 +1,462 @@
+XL
+H 4 areas 17 global symbols
+M main.c
+S push_xgset003C Ref0000
+S push_xgsetF000 Ref0000
+S push_xgset00FC Ref0000
+S pop_xgset003C Ref0000
+S pop_xgsetF000 Ref0000
+S pop_xgset00FC Ref0000
+A text size 2C4 flags 0
+dbfile E:\sendavrnrf24l01\main.c
+dbfunc e main 0 fV
+dbsym r Get_SO A c
+dbline FFFFFFFF 2
+dbline 7F 2
+dbline 80 2
+dbline 81 4
+dbline 82 6
+dbline 83 8
+dbline 84 E
+dbline 85 14
+dbline 87 18
+dbline 89 18
+dbline 8A 1C
+dbline 8B 1C
+dbline 8C 24
+dbline 8D 28
+dbline 8E 34
+dbline 8E 3C
+dbline 8F 42
+dbline 90 48
+dbline 91 4A
+dbline 92 5A
+dbline 93 5A
+dbline 94 60
+dbline 95 64
+dbline 96 6A
+dbline 97 6E
+dbline 98 6E
+dbline 99 6E
+dbline 9A 76
+dbline 9B 76
+dbline 9C 7C
+dbline 9D 88
+dbline 9E 8E
+dbline 9F 94
+dbline A0 96
+dbline A1 9C
+dbline A2 A2
+dbline A3 A4
+dbline A4 AA
+dbline A5 AA
+dbline A6 B4
+dbline A7 B4
+dbline A8 C6
+dbline A9 CC
+dbline AA DE
+dbline AB DE
+dbline AC E4
+dbline AD EE
+dbline AE EE
+dbline AF EE
+dbline 86 EE
+dbline FFFFFFFE F0
+dbline 0 F0
+dbfunc e init_CPU F4 fV
+dbline FFFFFFFF F4
+dbline B8 F4
+dbline B9 F4
+dbline BA F8
+dbline BB FC
+dbline BD FE
+dbline BE 104
+dbline BF 108
+dbline C0 10C
+dbline C1 10E
+dbline C2 110
+dbline C3 114
+dbline C4 118
+dbline C5 11C
+dbline C6 120
+dbline C7 124
+dbline C8 128
+dbline C9 12A
+dbline CA 12C
+dbline CB 12E
+dbline CC 130
+dbline CD 132
+dbline FFFFFFFE 134
+dbline 0 134
+dbfunc e delay 136 fV
+dbline FFFFFFFF 136
+dbline D0 136
+dbline D1 136
+dbline D2 138
+dbline D3 13A
+dbline D4 13C
+dbline D5 13E
+dbline D6 140
+dbline FFFFFFFE 142
+dbline 0 142
+dbfunc e delayms 144 fV
+dbsym r dly 10 s
+dbline FFFFFFFF 144
+dbline D9 144
+dbline DA 144
+dbline DA 146
+dbline DA 146
+dbline DA 14A
+dbline FFFFFFFE 150
+dbline 0 150
+dbfunc e clear_buf 152 fV
+dbsym r number 12 c
+dbsym r ptr 10 pc
+dbline FFFFFFFF 152
+dbline DE 152
+dbline DF 152
+dbline DF 154
+dbline DF 15C
+dbline DF 15E
+dbline FFFFFFFE 164
+dbline 0 164
+dbfunc e SPI_RW 166 fc
+dbsym r bit_ctr 16 c
+dbsym r byte 14 c
+dbline FFFFFFFF 16A
+dbline EA 16A
+dbline EC 16A
+dbline ED 16E
+dbline EE 16E
+dbline EF 172
+dbline F1 176
+dbline F2 178
+dbline F3 17A
+dbline F4 17C
+dbline F5 17E
+dbline F6 180
+dbline F6 184
+dbline F7 186
+dbline F8 188
+dbline F9 18A
+dbline EC 18A
+dbline EC 18C
+dbline FA 190
+dbline FFFFFFFE 192
+dbline 0 192
+dbfunc e SPI_RW_Reg 194 fc
+dbsym r status A c
+dbsym r value C c
+dbsym r reg A c
+dbline FFFFFFFF 19A
+dbline 103 19A
+dbline 105 19A
+dbline 106 19C
+dbline 107 19E
+dbline 108 1A4
+dbline 109 1A8
+dbline 10A 1AA
+dbline 10B 1AC
+dbline FFFFFFFE 1AE
+dbline 0 1AE
+dbfunc e SPI_Read 1B0 fc
+dbsym r reg_val A c
+dbsym r reg A c
+dbline FFFFFFFF 1B6
+dbline 114 1B6
+dbline 116 1B6
+dbline 117 1B8
+dbline 118 1BA
+dbline 119 1BE
+dbline 11A 1C4
+dbline 11B 1C6
+dbline 11C 1C8
+dbline FFFFFFFE 1CA
+dbline 0 1CA
+dbfunc e SPI_Read_Buf 1D0 fc
+dbsym r status A c
+dbsym r byte_ctr C c
+dbsym l bytes 6 c
+dbsym r pBuf E pc
+dbsym r reg A c
+dbline FFFFFFFF 1D6
+dbline 126 1D6
+dbline 128 1D6
+dbline 129 1D8
+dbline 12A 1DA
+dbline 12B 1E0
+dbline 12C 1E4
+dbline 12B 1F2
+dbline 12B 1F4
+dbline 12D 1FA
+dbline 12E 1FC
+dbline 12F 1FE
+dbline FFFFFFFE 200
+dbline 0 200
+dbfunc e SPI_Write_Buf 202 fc
+dbsym r status A c
+dbsym r byte_ctr C c
+dbsym l bytes 6 c
+dbsym r pBuf E pc
+dbsym r reg A c
+dbline FFFFFFFF 208
+dbline 139 208
+dbline 13B 208
+dbline 13C 20A
+dbline 13D 20C
+dbline 13E 212
+dbline 13F 216
+dbline 13E 220
+dbline 13E 222
+dbline 140 228
+dbline 141 22A
+dbline 142 22C
+dbline FFFFFFFE 22E
+dbline 0 22E
+dbfunc e RX_Mode 230 fV
+dbline FFFFFFFF 232
+dbline 14F 232
+dbline 150 232
+dbline 151 234
+dbline 152 236
+dbline 154 242
+dbline 155 248
+dbline 156 24E
+dbline 157 254
+dbline 158 25A
+dbline 159 260
+dbline 15A 266
+dbline 15B 268
+dbline FFFFFFFE 26A
+dbline 0 26A
+dbfunc e TX_Mode 26E fV
+dbline FFFFFFFF 270
+dbline 16F 270
+dbline 170 270
+dbline 171 272
+dbline 172 274
+dbline 173 280
+dbline 174 28C
+dbline 176 298
+dbline 177 29E
+dbline 178 2A4
+dbline 179 2AA
+dbline 17A 2B0
+dbline 17B 2B6
+dbline 17C 2BC
+dbline 17D 2BE
+dbline FFFFFFFE 2C0
+dbline 0 2C0
+S _clear_buf Def0152
+S _main Def0000
+S _SPI_Read Def01B0
+S _SPI_Write_Buf Def0202
+S _delayms Def0144
+S _SPI_RW Def0166
+S _init_CPU Def00F4
+S _delay Def0136
+S _SPI_Read_Buf Def01D0
+S _SPI_RW_Reg Def0194
+S _RX_Mode Def0230
+S _TX_Mode Def026E
+A data size 48 flags 20
+dbfile E:\sendavrnrf24l01\main.c
+dbsym e Buffer 0 A[64:64]c
+dbsym e TX_ADDRESS 40 A[5:5]c
+dbsym e accept_flag 45 c
+dbsym e accept_time 46 i
+S _TX_ADDRESS Def0040
+S _Buffer Def0000
+S _accept_flag Def0045
+S _accept_time Def0046
+A idata size 48 flags 0
+A bss size 1 flags 20
+dbfile E:\sendavrnrf24l01\main.c
+dbsym e key_debug 0 c
+S _key_debug Def0000
+T 00 00 00 00
+R 00 00 02 00
+T 02 00 00 00
+R 00 00 02 00
+T 04 00 00 00
+R 00 00 02 00
+T 06 00 00 00
+R 00 00 02 00
+T 08 00 00 00
+R 00 00 02 00
+T 0A 00 00 00
+R 00 00 02 00
+T 0C 00 00 00
+R 00 00 02 00
+T 0E 00 00 00
+R 00 00 02 00
+T 10 00 00 00
+R 00 00 02 00
+T 12 00 00 00
+R 00 00 02 00
+T 14 00 00 00
+R 00 00 02 00
+T 16 00 00 00
+R 00 00 02 00
+T 18 00 00 00
+R 00 00 02 00
+T 1A 00 00 00
+R 00 00 02 00
+T 1C 00 00 00
+R 00 00 02 00
+T 1E 00 00 00
+R 00 00 02 00
+T 20 00 00 00
+R 00 00 02 00
+T 22 00 00 00
+R 00 00 02 00
+T 24 00 00 00
+R 00 00 02 00
+T 26 00 00 00
+R 00 00 02 00
+T 28 00 00 00
+R 00 00 02 00
+T 2A 00 00 00
+R 00 00 02 00
+T 2C 00 00 00
+R 00 00 02 00
+T 2E 00 00 00
+R 00 00 02 00
+T 30 00 00 00
+R 00 00 02 00
+T 32 00 00 00
+R 00 00 02 00
+T 34 00 00 00
+R 00 00 02 00
+T 36 00 00 00
+R 00 00 02 00
+T 38 00 00 00
+R 00 00 02 00
+T 3A 00 00 00
+R 00 00 02 00
+T 3C 00 00 00
+R 00 00 02 00
+T 3E 00 00 00
+R 00 00 02 00
+T 40 00 34 43
+R 00 00 02 00
+T 42 00 10 10
+R 00 00 02 00
+T 44 00 01
+R 00 00 02 00
+T 45 00 00
+R 00 00 02 00
+T 46 00 00 00
+R 00 00 02 00
+T 00 00 21 97 AA 24 F8 94 76 D0 04 E6 10 E0 9B D0
+R 00 00 00 00
+T 0E 00 04 E6 10 E0 98 D0 0D D1 6B C0 1A 99 29 C0
+R 00 00 00 00
+T 1C 00 07 E0 C8 D0 00 93 00 00 06 FF 06 C0 84 E1
+R 00 00 00 00 00 08 03 00
+T 2A 00 88 83 20 E0 30 E0 01 E6 CE D0 20 90
+R 00 00 00 00 20 04 01 00 00 00 40 06 01 00 00 00
+T 36 00 00 00 24 FE 03 C0 22 27 01 EE A9 D0 2F EF
+R 00 00 00 00 00 02 03 00
+T 44 00 07 E2 A6 D0 F3 D0 80 91 00 00 80 35 71 F4
+R 00 00 00 00 00 0A 01 00
+T 52 00 80 91 01 00 81 30 51 F4 81 E0 80 93 45 00
+R 00 00 00 00 00 04 01 00 00 0E 01 00
+T 60 00 82 E0 88 B9 08 E8 13 E1 6D D0 22 24 28 B8
+R 00 00 00 00
+T 6E 00 20 90 45 00 22 20 D1 F4 81 E0 80 93 45 00
+R 00 00 00 00 00 04 01 00 00 0E 01 00
+T 7C 00 22 24 33 24 30 92 47 00 20 92 46 00 80 E5
+R 00 00 00 00 00 08 01 00 00 0C 01 00
+T 8A 00 80 93 00 00 82 E0 80 93 01 00 EC D0 80 E5
+R 00 00 00 00 00 04 01 00 00 0A 01 00
+T 98 00 80 93 00 00 82 E0 80 93 01 00 E5 D0 04 E6
+R 00 00 00 00 00 04 01 00 00 0A 01 00
+T A6 00 10 E0 4D D0 81 E0 80 93 45 00 88 23 E9 F0
+R 00 00 00 00 00 0A 01 00
+T B4 00 80 91 46 00 90 91 47 00 01 96 90 93 47 00
+R 00 00 00 00 00 04 01 00 00 08 01 00 00 0E 01 00
+T C2 00 80 93 46 00 04 E6 10 E0 3C D0 88 EE 93 E0
+R 00 00 00 00 00 04 01 00
+T D0 00 20 90 46 00 30 90 47 00 82 15 93 05 40 F4
+R 00 00 00 00 00 04 01 00 00 08 01 00
+T DE 00 22 24 20 92 45 00 33 24 30 92 47 00 20 92
+R 00 00 00 00 00 06 01 00 00 0C 01 00
+T EC 00 46 00 94 CF 21 96 08 95
+R 00 00 00 00 00 02 01 00
+T F4 00 22 24 25 BE 20 92 69 00 2D BA 81 E0 80 93
+R 00 00 00 00
+T 02 01 6E 00 20 92 6F 00 20 92 70 00 F8 94 00 00
+R 00 00 00 00
+T 10 01 81 E8 85 B9 83 EF 84 B9 80 E8 8B B9 8F EF
+R 00 00 00 00
+T 1E 01 8A B9 80 E8 88 B9 88 E7 87 B9 5F 98 05 D0
+R 00 00 00 00
+T 2C 01 5E 9A 03 D0 29 98 01 D0 08 95
+R 00 00 00 00
+T 36 01 00 00 00 00 00 00 00 00 00 00 00 00 08 95
+R 00 00 00 00
+T 44 01 02 C0 01 50 10 40 00 30 01 07 D9 F7 08 95
+R 00 00 00 00
+T 52 01 05 C0 22 24 F8 01 21 92 8F 01 2A 95 80 E0
+R 00 00 00 00
+T 60 01 82 17 C0 F3 08 95
+R 00 00 00 00
+T 66 01 00 D0 40 2F 66 27 0F C0 47 FF 02 C0 28 9A
+R 00 00 00 00 82 02 01 00
+T 74 01 01 C0 28 98 DE DF 44 0F 29 9A DB DF 1B 9B
+R 00 00 00 00
+T 82 01 01 C0 41 60 29 98 D6 DF 63 95 68 30 78 F3
+R 00 00 00 00
+T 90 01 04 2F 00 C0
+R 00 00 00 00 82 04 04 00
+T 94 01 00 D0 C2 2E A0 2E 5E 98 CC DF 0A 2D E2 DF
+R 00 00 00 00 82 02 00 00
+T A2 01 A0 2E 0C 2D DF DF 5E 9A C5 DF 0A 2D 00 C0
+R 00 00 00 00 82 0E 03 00
+T B0 01 AA 92 BA 92 A0 2E 5E 98 BE DF 0A 2D D4 DF
+R 00 00 00 00
+T BE 01 00 27 D2 DF A0 2E 5E 9A B7 DF 0A 2D B9 90
+R 00 00 00 00
+T CC 01 A9 90 08 95
+R 00 00 00 00
+T D0 01 00 D0 79 01 A0 2E 5E 98 AE DF 0A 2D C4 DF
+R 00 00 00 00 82 02 02 00
+T DE 01 A0 2E CC 24 08 C0 00 27 BF DF EC 2D FF 27
+R 00 00 00 00
+T EC 01 EE 0D FF 1D 00 83 C3 94 0E 80 C0 14 A8 F3
+R 00 00 00 00
+T FA 01 5E 9A 9C DF 0A 2D 00 C0
+R 00 00 00 00 82 08 05 00
+T 02 02 00 D0 79 01 A0 2E 5E 98 95 DF 0A 2D AB DF
+R 00 00 00 00 82 02 02 00
+T 10 02 A0 2E CC 24 06 C0 F7 01 01 91 7F 01 A4 DF
+R 00 00 00 00
+T 1E 02 A0 2E C3 94 0E 80 C0 14 B8 F3 5E 9A 85 DF
+R 00 00 00 00
+T 2C 02 0A 2D 00 C0
+R 00 00 00 00 82 04 05 00
+T 30 02 21 97 5F 98 80 DF 85 E0 88 83 20 E0 30 E0
+R 00 00 00 00 20 0C 01 00 40 00 40 0E 01 00 40 00
+T 3E 02 0A E2 E0 DF 21 E0 01 E2 A6 DF 21 E0 02 E2
+R 00 00 00 00
+T 4C 02 A3 DF 28 E2 05 E2 A0 DF 24 E1 01 E3 9D DF
+R 00 00 00 00
+T 5A 02 27 E0 06 E2 9A DF 2F E0 00 E2 97 DF 5F 9A
+R 00 00 00 00
+T 68 02 66 DF 21 96 08 95
+R 00 00 00 00
+T 6E 02 21 97 5F 98 61 DF 85 E0 88 83 20 E0 30 E0
+R 00 00 00 00 20 0C 01 00 40 00 40 0E 01 00 40 00
+T 7C 02 00 E3 C1 DF 85 E0 88 83 20 E0 30 E0 0A E2
+R 00 00 00 00 20 0A 01 00 40 00 40 0C 01 00 40 00
+T 8A 02 BB DF 84 E1 88 83 20 E0 30 E0 00 EA B5 DF
+R 00 00 00 00 20 08 01 00 00 00 40 0A 01 00 00 00
+T 98 02 21 E0 01 E2 7B DF 21 E0 02 E2 78 DF 2A E1
+R 00 00 00 00
+T A6 02 04 E2 75 DF 28 E2 05 E2 72 DF 27 E0 06 E2
+R 00 00 00 00
+T B4 02 6F DF 2E E0 00 E2 6C DF 5F 9A 3B DF 21 96
+R 00 00 00 00
+T C2 02 08 95
+R 00 00 00 00

@@ -1,0 +1,42 @@
+
+**** Build of configuration Debug for project 21_2_TF_Audio ****
+
+"D:\\CCS5.5\\ccsv5\\utils\\bin\\gmake" -k all 
+'Building file: ../main.c'
+'Invoking: MSP430 Compiler'
+"D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=coffabi -g --include_path="D:/CCS5.5/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src/SD" --include_path="D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/include" --define=__MSP430G2553__ --diag_warning=225 --display_error_number --printf_support=minimal --preproc_with_compile --preproc_dependency="main.pp"  "../main.c"
+'Finished building: ../main.c'
+' '
+'Building file: ../src/DAC8411.c'
+'Invoking: MSP430 Compiler'
+"D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=coffabi -g --include_path="D:/CCS5.5/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src/SD" --include_path="D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/include" --define=__MSP430G2553__ --diag_warning=225 --display_error_number --printf_support=minimal --preproc_with_compile --preproc_dependency="src/DAC8411.pp" --obj_directory="src"  "../src/DAC8411.c"
+'Finished building: ../src/DAC8411.c'
+' '
+'Building file: ../src/softFIFO.c'
+'Invoking: MSP430 Compiler'
+"D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=coffabi -g --include_path="D:/CCS5.5/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src/SD" --include_path="D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/include" --define=__MSP430G2553__ --diag_warning=225 --display_error_number --printf_support=minimal --preproc_with_compile --preproc_dependency="src/softFIFO.pp" --obj_directory="src"  "../src/softFIFO.c"
+'Finished building: ../src/softFIFO.c'
+' '
+'Building file: ../src/SD/SD_HardWare.c'
+'Invoking: MSP430 Compiler'
+"D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=coffabi -g --include_path="D:/CCS5.5/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src/SD" --include_path="D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/include" --define=__MSP430G2553__ --diag_warning=225 --display_error_number --printf_support=minimal --preproc_with_compile --preproc_dependency="src/SD/SD_HardWare.pp" --obj_directory="src/SD"  "../src/SD/SD_HardWare.c"
+'Finished building: ../src/SD/SD_HardWare.c'
+' '
+'Building file: ../src/SD/SD_SPI.c'
+'Invoking: MSP430 Compiler'
+"D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=coffabi -g --include_path="D:/CCS5.5/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src/SD" --include_path="D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/include" --define=__MSP430G2553__ --diag_warning=225 --display_error_number --printf_support=minimal --preproc_with_compile --preproc_dependency="src/SD/SD_SPI.pp" --obj_directory="src/SD"  "../src/SD/SD_SPI.c"
+'Finished building: ../src/SD/SD_SPI.c'
+' '
+'Building file: ../src/SD/SPI.c'
+'Invoking: MSP430 Compiler'
+"D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=coffabi -g --include_path="D:/CCS5.5/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src" --include_path="C:/Users/shan/Desktop/G2 pocket lab code for CCS5.1/21_2_TF_Audio/src/SD" --include_path="D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/include" --define=__MSP430G2553__ --diag_warning=225 --display_error_number --printf_support=minimal --preproc_with_compile --preproc_dependency="src/SD/SPI.pp" --obj_directory="src/SD"  "../src/SD/SPI.c"
+'Finished building: ../src/SD/SPI.c'
+' '
+'Building target: 21_2_TF_Audio.out'
+'Invoking: MSP430 Linker'
+"D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=coffabi -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --printf_support=minimal -z -m"21_2_TF_Audio.map" --stack_size=80 --heap_size=80 -i"D:/CCS5.5/ccsv5/ccs_base/msp430/include" -i"D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/lib" -i"D:/CCS5.5/ccsv5/tools/compiler/msp430_4.2.1/include" --reread_libs --warn_sections --xml_link_info="21_2_TF_Audio_linkInfo.xml" --rom_model -o "21_2_TF_Audio.out"  "./src/SD/SPI.obj" "./src/SD/SD_SPI.obj" "./src/SD/SD_HardWare.obj" "./src/softFIFO.obj" "./src/DAC8411.obj" "./main.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 
+<Linking>
+'Finished building target: 21_2_TF_Audio.out'
+' '
+
+**** Build Finished ****

@@ -1,0 +1,178 @@
+XL
+H 1 areas D global symbols
+M key.c
+S push_gset1 Ref0000
+S _KeyTemp Ref0000
+S _KeepKeyCnt Ref0000
+S _ADRead Ref0000
+S _chKeyVal Ref0000
+S _EEPROMWriteBytes_extIO Ref0000
+S _KeyValue Ref0000
+S pop_gset1 Ref0000
+S _KeyBuf Ref0000
+S _KeyValue2 Ref0000
+S _Flag Ref0000
+A text size 18C flags 0
+dbfile D:\OLED\key.c
+dbfunc e key 0 fc
+dbsym r keyT 14 c
+dbsym l ADBuf2 2 i
+dbline FFFFFFFF 4
+dbline 10 4
+dbline 12 4
+dbline 14 C
+dbline 16 14
+dbline 18 16
+dbline 19 34
+dbline 1B 36
+dbline 1C 4E
+dbline 1E 50
+dbline 1F 68
+dbline 21 6A
+dbline 22 82
+dbline 24 84
+dbline 25 9C
+dbline 27 9E
+dbline 28 B2
+dbline FFFFFFFE B4
+dbline 0 B8
+dbfunc e keyLog BA fV
+dbline FFFFFFFF BA
+dbline 2E BA
+dbline 2F BA
+dbline 31 C0
+dbline 32 CA
+dbline 33 CA
+dbline 34 D0
+dbline 35 D6
+dbline 36 DE
+dbline 37 DE
+dbline 38 E6
+dbline 39 E6
+dbline 3A EE
+dbline 3B EE
+dbline 3B EE
+dbline 3B F8
+dbline 3B F8
+dbline 3C F8
+dbline 3D 100
+dbline 3F 102
+dbline 40 102
+dbline 41 10A
+dbline 41 10A
+dbline 41 114
+dbline 41 114
+dbline 42 114
+dbline 43 114
+dbline 45 116
+dbline 46 116
+dbline 46 116
+dbline 46 120
+dbline 46 120
+dbline 47 120
+dbline 47 120
+dbline 47 126
+dbline 47 126
+dbline 48 126
+dbline 49 12C
+dbline 49 12C
+dbline 49 136
+dbline 49 136
+dbline 4A 136
+dbline 4B 136
+dbline 4D 138
+dbline 4E 138
+dbline 4F 144
+dbline 50 14A
+dbline 50 14A
+dbline 50 154
+dbline 50 154
+dbline 51 154
+dbline 51 154
+dbline 51 15A
+dbline 51 15A
+dbline 52 15A
+dbline 52 15A
+dbline 52 160
+dbline 52 160
+dbline 53 160
+dbline 54 160
+dbline 57 162
+dbline 58 162
+dbline 59 16A
+dbline 5A 170
+dbline 5B 174
+dbline 5B 174
+dbline 5B 17E
+dbline 5B 17E
+dbline 5C 17E
+dbline 5C 17E
+dbline 5C 184
+dbline 5C 184
+dbline 5D 184
+dbline 5D 184
+dbline 5D 18A
+dbline 5D 18A
+dbline 5E 18A
+dbline FFFFFFFE 18A
+dbline 0 18A
+S _key Def0000
+S _keyLog Def00BA
+T 00 00 00 D0 24 97 22 24 33 24 3B 82 2A 82 03 E0
+R 00 00 00 00 82 02 00 00
+T 0E 00 00 D0 1B 83 0A 83 4F EF 00 30 01 07 31 F4
+R 00 00 00 00 82 02 03 00
+T 1C 00 2A 80 3B 80 22 20 49 F4 33 20 39 F4 8A 81
+R 00 00 00 00
+T 2A 00 9B 81 80 33 E0 E0 9E 07 08 F4 42 E0 2A 80
+R 00 00 00 00
+T 38 00 3B 80 80 EA 90 E0 82 15 93 05 30 F4 C1 01
+R 00 00 00 00
+T 46 00 80 32 E1 E0 9E 07 08 F4 41 E0 2A 80 3B 80
+R 00 00 00 00
+T 54 00 80 EF 91 E0 82 15 93 05 30 F4 C1 01 80 33
+R 00 00 00 00
+T 62 00 E2 E0 9E 07 08 F4 43 E0 2A 80 3B 80 80 ED
+R 00 00 00 00
+T 70 00 92 E0 82 15 93 05 30 F4 C1 01 80 32 E3 E0
+R 00 00 00 00
+T 7E 00 9E 07 08 F4 44 E0 2A 80 3B 80 80 E5 93 E0
+R 00 00 00 00
+T 8C 00 82 15 93 05 30 F4 C1 01 80 38 E3 E0 9E 07
+R 00 00 00 00
+T 9A 00 08 F4 48 E0 82 E0 90 E0 99 83 88 83 9E 01
+R 00 00 00 00
+T A8 00 2E 5F 3F 4F 00 E2 10 E0 00 D0 04 2F 24 96
+R 00 00 00 00 82 0A 05 00
+T B6 00 00 D0 08 95
+R 00 00 00 00 82 02 07 00
+T BA 00 A2 DF 00 93 00 00 30 90 00 00 30 16 09 F0
+R 00 00 00 00 02 06 01 00 02 0A 08 00
+T C8 00 4C C0 23 2C 20 92 00 00 22 24 20 92 00 00
+R 00 00 00 00 02 08 06 00 02 0E 01 00
+T D6 00 20 90 00 00 32 14 69 F5 20 90 00 00 22 FE
+R 00 00 00 00 02 04 09 00 02 0C 0A 00
+T E4 00 18 C0 20 90 00 00 22 20 51 F0 80 91 00 00
+R 00 00 00 00 02 06 02 00 02 0E 0A 00
+T F2 00 87 7F 80 93 00 00 82 2D 81 50 80 93 00 00
+R 00 00 00 00 02 06 0A 00 02 0E 02 00
+T 00 01 44 C0 20 90 00 00 20 92 00 00 80 91 00 00
+R 00 00 00 00 02 06 06 00 02 0A 04 00 02 0E 0A 00
+T 0E 01 88 60 80 93 00 00 3A C0 80 91 00 00 87 7F
+R 00 00 00 00 02 06 0A 00 02 0C 0A 00
+T 1C 01 80 93 00 00 8F 7D 80 93 00 00 8F EF 80 93
+R 00 00 00 00 02 04 0A 00 02 0A 0A 00
+T 2A 01 00 00 80 91 00 00 8F 7E 80 93 00 00 29 C0
+R 00 00 00 00 02 02 02 00 02 06 0A 00 02 0C 0A 00
+T 38 01 20 90 00 00 20 92 00 00 20 92 00 00 8F EF
+R 00 00 00 00 02 04 06 00 02 08 09 00 02 0C 04 00
+T 46 01 80 93 00 00 80 91 00 00 8B 7F 80 93 00 00
+R 00 00 00 00 02 04 02 00 02 08 0A 00 02 0E 0A 00
+T 54 01 88 60 80 93 00 00 8F 7D 80 93 00 00 14 C0
+R 00 00 00 00 02 06 0A 00 02 0C 0A 00
+T 62 01 20 90 00 00 20 92 00 00 8F EF 80 93 00 00
+R 00 00 00 00 02 04 01 00 02 08 08 00 02 0E 04 00
+T 70 01 80 93 00 00 80 91 00 00 87 7F 80 93 00 00
+R 00 00 00 00 02 04 02 00 02 08 0A 00 02 0E 0A 00
+T 7E 01 8F 7E 80 93 00 00 8F 7D 80 93 00 00 08 95
+R 00 00 00 00 02 06 0A 00 02 0C 0A 00

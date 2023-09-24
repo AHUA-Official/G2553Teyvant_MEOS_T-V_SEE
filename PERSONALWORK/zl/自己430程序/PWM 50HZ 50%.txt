@@ -1,0 +1,32 @@
+/********************************************************* 
+用定时器A1，定时器A利用辅助时钟在P1.2口输出PWM.f=50HZ;K=25%。
+*********************************************************/
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned char
+void port_init(void)               //端口初始化
+{
+  P1DIR |= BIT2;                   // P1.2用于外围模块输出即：产生PWM
+  P1SEL |= BIT2; 
+}
+void int_WDT(void)                 //看门狗初始化
+{
+   WDTCTL = WDTPW + WDTHOLD;       // Stop watchdog
+}
+void int_Time_A(void)              //定时器A初始化
+{
+  BCSCTL1 |=DIVA_3;                //辅助系统8分频f=32768/8=4096
+  TACTL = TASSEL_1 + MC_1;         // AMCLK，upmode
+  CCR0 = 84;                       // PWM Period
+  CCR1 = 21;                       // CCR1 PWM duty cycle
+  CCTL1 = OUTMOD_7;                // CCR1 reset/set 
+}
+void main( void )                  //主函数
+{     
+   port_init();                    // I/O口设置
+   int_WDT();                      //看门狗设置
+   int_Time_A();                   //定时器A设置
+   _EINT();                        // 开全局中断
+   LPM3;                           //进入低功耗模式0
+
+ }

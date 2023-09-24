@@ -1,0 +1,42 @@
+/********************************************************* 
+         定时器A利用辅助时钟在
+         TA0能输出1路PWM (P1.2或者P1.6)TA0.1(周期 占空比任意调)
+         TA1能输出1路PWM(P2.2和P2.4)TA1.1和TA1.2(周期 占空比任意调)
+*********************************************************/
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned char
+void port_init(void)               //端口初始化
+{
+  P1DIR |= BIT2;                   // P1.2用于外围模块输出即：产生PWM1
+  P1SEL |= BIT2; 
+  P2DIR |= BIT2+BIT4;                   // P2.2用于外围模块输出即：产生PWM2
+  P2SEL |= BIT2+BIT4;
+}
+void int_WDT(void)                 //看门狗初始化
+{
+   WDTCTL = WDTPW + WDTHOLD;       // Stop watchdog
+}
+void int_Time_A(void)              //定时器A初始化
+{
+  BCSCTL1 |=DIVA_0;                //辅助系统时钟不分频
+  TA0CTL = TASSEL_1 + MC_1;        //ACLK，upmode :TA0CTL=TACTL
+  TA0CCR0 = 35;                    // PWM Period  :TA0CCR0=TACCR0=CCR0
+  TA0CCR1 = 7;                     // TA0CCR1 PWM 占空比
+  TA0CCTL1 = OUTMOD_7;             // TA0CCR1 reset/set 
+  TA1CCR0 = 129-1;                 // PWM Period
+  TA1CCTL1 = OUTMOD_7;             // CCR1 reset/set
+  TA1CCTL2 = OUTMOD_7;             //OUTMOD_7
+  TA1CCR1 = 41;
+  TA1CCR2 = 82;
+  TA1CTL = TASSEL_1 + MC_1;        // AMCLK, up mode
+}
+void main( void )                  //主函数
+{     
+   port_init();                    // I/O口设置
+   int_WDT();                      //看门狗设置
+   int_Time_A();                   //定时器A设置
+   _EINT();                        // 开全局中断
+   LPM3;                           //进入低功耗模式0
+
+ }

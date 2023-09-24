@@ -1,0 +1,48 @@
+/********************************************************* 
+用定时器A1，定时器A1利用辅助系统时钟输出矩形波（P1.0,P1.6=1时 2s）.
+（P1.0,P1.6=0时 1s）
+*********************************************************/
+#include <msp430g2553.h>
+#define uint unsigned int 
+#define uchar unsigned char
+void port_init(void)               //端口初始化
+{
+   P1DIR |= (BIT0+BIT6);
+   P1OUT &= ~(BIT0+BIT6);
+}
+void int_WDT(void)                 //看门狗初始化
+{
+   WDTCTL = WDTPW + WDTHOLD;       // Stop watchdog
+}
+void int_Time_A(void)              //定时器A初始化
+{
+  BCSCTL1 |= DIVA_3;               //辅助时钟8分频
+  TACTL = TASSEL_1 + MC_2 + TAIE;  // TACTL 控制寄存器ACLK, contmode, interrupt
+  CCTL1 = CCIE;                    //CCR1 interrupt enabled
+  CCR1 = 4096;                     //定时1s
+  CCTL2 = CCIE;                    //CCR2 interrupt enabled
+  CCR2 = 12288;                    //定时2s
+}
+void main( void )                  //主函数
+{     
+   port_init();                    // I/O口设置
+   int_WDT();                      //看门狗设置
+   int_Time_A();                   //定时器A设置
+   _EINT();                        // 开全局中断
+   LPM3;                           //进入低功耗模式3
+ }
+//*****TimeA1中断服务程序******//
+#pragma vector=TIMER0_A1_VECTOR   
+__interrupt void Timer_A(void)
+{
+  switch( TA0IV )
+  {
+    case  2:  P1OUT |= (BIT0+BIT6);           // CCR1比较寄存器中断
+              break;
+    case  4:  P1OUT &= ~(BIT0+BIT6);          // CCR2比较寄存器中断
+              TACTL |=TACLR;
+              break;                          // CCR2 not used
+    case 10:  break;                          // overflow
+            
+  }
+}

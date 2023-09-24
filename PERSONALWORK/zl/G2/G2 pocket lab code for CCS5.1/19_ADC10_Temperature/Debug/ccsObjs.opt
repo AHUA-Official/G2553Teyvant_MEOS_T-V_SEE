@@ -1,0 +1,1 @@
+"./src/TCA6416A.obj" "./src/LCD_128.obj" "./src/I2C.obj" "./src/HT1621.obj" "./main.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 

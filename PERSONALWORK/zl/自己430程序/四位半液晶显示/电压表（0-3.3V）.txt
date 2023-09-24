@@ -1,0 +1,270 @@
+/******************************************************************************
+
+  利用ADC模数转换，来测量电压（量程0V——3.3V），P1.1于GND作为输入电压，
+
+  在四位半LCD上低三位显示电压值
+
+
+******************************************************************************/
+#include "msp430g2553.h"
+#include <math.h>
+#define uint unsigned int 
+#define uchar unsigned 
+
+#define BIAS    0x52  //0b1000 0100 1010 1/3duty 4com
+#define SYSDIS  0X00  //0b1000 0000 0000 关振系统荡器和LCD偏压发生器
+#define SYSEN   0X02  //0b1000 0000 0010 打开系统振荡器
+#define LCDOFF  0X04  //0b1000 0000 0100 关LCD偏压
+#define LCDON   0X06  //0b1000 0000 0110 打开LCD偏压
+#define XTAL    0x28  //0b1000 0010 1000 外部接时钟
+#define RC256   0X30  //0b1000 0011 0000 内部时钟
+#define TONEON  0X12 //0b1000 0001 0010 打开声音输出
+#define TONEOFF 0X10 //0b1000 0001 0000 关闭声音输出
+#define WDTDIS  0X0A  //0b1000 0000 1010 禁止看门狗
+#define HT1621_DAT_H P2OUT|=BIT0
+#define HT1621_DAT_L P2OUT&=~BIT0
+#define HT1621_CS_H  P2OUT|=BIT1
+#define HT1621_CS_L  P2OUT&=~BIT1
+#define HT1621_WR_H  P2OUT|=BIT2
+#define HT1621_WR_L  P2OUT&=~BIT2
+
+uchar Ht1621Tab[]={0x00};
+uchar Ht1621Tab1[]={0x0c,0x0a,0x0c,  //0  不带小数点表格
+                    0x00,0x00,0x0c,  //1
+                    0x04,0x0e,0x08,  //2
+                    0x00,0x0e,0x0c,  //3
+                    0x08,0x04,0x0c,  //4
+                    0x08,0x0e,0x04,  //5
+                    0x0c,0x0e,0x04,  //6
+                    0x00,0x08,0x0c,  //7
+                    0x0c,0x0e,0x0c,  //8
+                    0x08,0x0e,0x0c}; //9
+uchar Ht1621Tab2[]={0x0e,0x0a,0x0c,  //0    带小数点表格
+                    0x02,0x00,0x0c,  //1
+                    0x06,0x0e,0x08,  //2
+                    0x02,0x0e,0x0c,  //3
+                    0x0a,0x04,0x0c,  //4
+                    0x0a,0x0e,0x04,  //5
+                    0x0e,0x0e,0x04,  //6
+                    0x02,0x08,0x0c,  //7
+                    0x0e,0x0e,0x0c,  //8
+                    0x0a,0x0e,0x0c}; //9
+uchar Ht1621Tab3[]={0x0c,0x0a,0x0e,  //0
+                    0x00,0x00,0x0e,  //1
+                    0x04,0x0e,0x0a,  //2
+                    0x00,0x0e,0x0c,  //3
+                    0x08,0x04,0x0c,  //4
+                    0x08,0x0e,0x04,  //5
+                    0x0c,0x0e,0x04,  //6
+                    0x00,0x08,0x0c,  //7
+                    0x0c,0x0e,0x0c,  //8
+                    0x08,0x0e,0x0c}; //9
+
+/**********************************************
+                函数声明
+**********************************************/
+void init_devices(void);          //初始化配置         
+void int_Clock(void);             //时钟配置
+void port_init(void);             //IO配置
+void ADC_init(void);              //ADC转换配置           
+void Delay_us(uint us);           // 延时us  前提是f=1MHZ
+void Delay_ms(uint ms);           // 延时ms  前提是f=1MHZ
+
+void Ht1621Wr_Data(uchar Data,uchar cnt);
+void Ht1621WrCmd(uchar Cmd);
+void Ht1621WrOneData(uchar Addr,uchar Data);
+void Ht1621WrAllData(uchar Addr,uchar *p,uchar cnt);
+void Ht1621_Init(void);
+
+void display(void);
+
+volatile uchar  ge=0,shi=0,bai=0;    //LCD显示的位数
+volatile float voltage=0,VCC_GND=3.3;//voltage为测的电压，VCC_GND为最大测量电压
+volatile uint  voltage_display=0;    //LCD显示的示数
+void display_dianya(void);
+void main(void)
+{
+  init_devices();
+  Ht1621_Init();                //上电初始化LCD
+  Delay_ms(1);                  //延时一段时间
+  Ht1621WrAllData(0,Ht1621Tab,16);
+  _EINT(); 
+  while(1)
+  {
+    ADC10CTL0 |= ENC + ADC10SC;             // Sampling and conversion star
+    LPM3;                                   // LPM0, ADC10_ISR will force exit
+    voltage = ADC10MEM*VCC_GND/1023;
+    voltage_display=voltage*100;
+    display_dianya(); 
+  }
+}
+
+void init_devices(void)
+{
+   WDTCTL = WDTPW + WDTHOLD;    // Stop watchdog
+   int_Clock();
+   port_init();
+   ADC_init();
+}
+void int_Clock(void)               //时钟初始化
+{
+  BCSCTL1 = CALBC1_1MHZ;           //DCO数字振荡器=1MHZ
+  DCOCTL  = CALBC1_1MHZ;           //DCO数字振荡器=1MHZ
+}
+void port_init(void)              //端口初始化
+{
+   P1SEL |= BIT1;                  //P1.1为外围复用功能
+   P2DIR |= (BIT0+BIT1+BIT2);      
+}
+void ADC_init(void)
+{
+  ADC10CTL0 = ADC10SHT_3 + ADC10ON + ADC10IE; // 64 x ADC10CLKs:采样保持时间
+                                              // ADC开启, ADC10 中断使能
+  ADC10CTL1 = INCH_1+ADC10SSEL_1;             // 输入通道选择A1，ADC10时钟源选择ACLK
+  ADC10AE0 |= BIT1;                           // PA.1 ADC option select
+}
+void Delay_us(uint us)           // 延时us  前提是f=1MHZ
+{    
+  uint i;
+  for(i=0;i<us;i++)
+  __delay_cycles(1);      
+}
+void Delay_ms(uint ms)           // 延时ms  前提是f=1MHZ
+{
+  uint j;
+  for(j=0;j<ms;j++)
+  __delay_cycles(1000); 
+}
+/******************************************************
+写数据函数,cnt为传送数据位数,数据传送为低位在前
+*******************************************************/
+void Ht1621Wr_Data(uchar Data,uchar cnt)
+{
+    uchar i;
+    for (i=0;i<cnt;i++)
+     {
+        HT1621_WR_L;
+        Delay_us(1);
+        if(Data&0x80)
+          HT1621_DAT_H;
+        else
+          HT1621_DAT_L;
+        Delay_us(1);
+        HT1621_WR_H;
+        Delay_us(1);
+        Data<<=1;
+ }
+}
+/********************************************************
+函数名称：void Ht1621WrCmd(uchar Cmd)
+功能描述: HT1621命令写入函数
+全局变量：无
+参数说明：Cmd为写入命令数据
+说明：写入命令标识位100
+********************************************************/
+void Ht1621WrCmd(uchar Cmd)
+{
+    HT1621_CS_L;
+    Delay_us(1);
+    Ht1621Wr_Data(0x80,4); //写入命令标志100
+    Ht1621Wr_Data(Cmd,8); //写入命令数据
+    HT1621_CS_H;
+    Delay_us(1);
+}
+
+/********************************************************
+函数名称：void Ht1621WrOneData(uchar Addr,uchar Data)
+功能描述: HT1621在指定地址写入数据函数
+全局变量：无
+参数说明：Addr为写入初始地址，Data为写入数据
+说明：因为HT1621的数据位4位，所以实际写入数据为参数的后4位
+********************************************************/
+void Ht1621WrOneData(uchar Addr,uchar Data)
+{
+    HT1621_CS_L;
+    Ht1621Wr_Data(0xa0,3);    //写入数据标志101
+    Ht1621Wr_Data(Addr<<2,6); //写入地址数据
+    Ht1621Wr_Data(Data<<4,4); //写入数据
+    HT1621_CS_H;
+    Delay_us(1);
+}
+
+/********************************************************
+函数名称：void Ht1621WrAllData(uchar Addr,uchar *p,uchar cnt)
+功能描述: HT1621连续写入方式函数
+全局变量：无
+参数说明：Addr为写入初始地址，*p为连续写入数据指针，
+cnt为写入数据总数
+说明：HT1621的数据位4位，此处每次数据为8位，写入数据
+总数按8位计算
+********************************************************/
+void Ht1621WrAllData(uchar Addr,uchar *p,uchar cnt)
+{
+    uchar i;
+    HT1621_CS_L;
+    Ht1621Wr_Data(0xa0,3); //写入数据标志101
+    Ht1621Wr_Data(Addr<<2,6); //写入地址数据
+    for (i=0;i<cnt;i++)
+      {
+        Ht1621Wr_Data(0x00,8); //写入数据
+        p++;
+      }
+    HT1621_CS_H;
+    Delay_us(1);
+}
+ 
+/********************************************************
+函数名称：void Ht1621_Init(void)
+功能描述: HT1621初始化
+全局变量：无
+参数说明：无
+说明：初始化后，液晶屏所有字段均显示
+********************************************************/
+void Ht1621_Init(void)
+{
+    HT1621_CS_H;
+    HT1621_WR_H;
+    HT1621_DAT_H;
+    Delay_ms(200); //延时使LCD工作电压稳定
+    Ht1621WrCmd(BIAS);
+    Ht1621WrCmd(RC256); //使用内部振荡器
+    Ht1621WrCmd(SYSDIS);
+    Ht1621WrCmd(WDTDIS);
+    Ht1621WrCmd(SYSEN);
+    Ht1621WrCmd(LCDON);
+}
+
+void display_dianya(void)
+{
+   ge=voltage_display%10;
+   shi=voltage_display%100/10;
+   bai=voltage_display/100;
+   display ();
+}
+
+void display (void)
+{
+//       Ht1621WrOneData(0x01,Ht1621Tab1[3*qian]);
+//       Ht1621WrOneData(0x03,Ht1621Tab1[3*qian+1]);
+//       Ht1621WrOneData(0x05,Ht1621Tab1[3*qian+2]);//调用 Ht1621Tab3
+                                                  //显示 最前端1
+       Ht1621WrOneData(0x07,Ht1621Tab1[3*bai]);
+       Ht1621WrOneData(0x09,Ht1621Tab1[3*bai+1]);
+       Ht1621WrOneData(0x0b,Ht1621Tab1[3*bai+2]);
+       
+       Ht1621WrOneData(0x0d,Ht1621Tab2[3*shi]);
+       Ht1621WrOneData(0x0f,Ht1621Tab2[3*shi+1]);
+       Ht1621WrOneData(0x11,Ht1621Tab2[3*shi+2]);//调用 Ht1621Tab3 
+                                                 //显示字母LOW BATTERY
+       Ht1621WrOneData(0x13,Ht1621Tab1[3*ge]);   
+       Ht1621WrOneData(0x15,Ht1621Tab1[3*ge+1]);
+       Ht1621WrOneData(0x17,Ht1621Tab1[3*ge+2]); //调用 Ht1621Tab3  
+                                                 //显示CONTINUITY
+}
+
+// ADC10 interrupt service routine
+#pragma vector=ADC10_VECTOR
+__interrupt void ADC10_ISR(void)
+{
+  LPM3_EXIT;        // Clear CPUOFF bit from 0(SR)
+}

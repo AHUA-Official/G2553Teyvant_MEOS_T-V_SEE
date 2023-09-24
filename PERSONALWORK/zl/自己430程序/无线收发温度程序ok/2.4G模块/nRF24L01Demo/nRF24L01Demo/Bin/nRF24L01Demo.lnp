@@ -1,0 +1,5 @@
+".\Bin\STARTUP.obj",
+".\Bin\nRF24L01.obj",
+".\Bin\main.obj" 
+TO ".\Bin\nRF24L01Demo" 
+PRINT(".\nRF24L01Demo.m51")

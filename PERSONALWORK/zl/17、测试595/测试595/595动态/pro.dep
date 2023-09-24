@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>3121804502</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\Debug\Obj\main.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\pro.pbd</file>
+      <file>$PROJ_DIR$\main.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\Debug\Exe\pro.d43</file>
+      <file>$PROJ_DIR$\..\..\..\&#x9879;&#x76ee;-LED&#x663e;&#x793A;&#x5C4F;\430G2553\430,595&#x6D4B;&#x8BD5;&#x7A0B;&#x5e8F;\main.c</file>
+      <file>$PROJ_DIR$\..\..\..\&#x5355;&#x7247;&#x673A;&#x5e38;&#x7528;&#x6A21;&#x5757;\&#x6A21;&#x5757;&#x4F7F;&#x7528;&#x8D44;&#x6599;\YL-3 &#x4e32;&#x884C;&#x6570;&#x7801;&#x7BA1;&#x8D44;&#x6599;\&#x4e32;&#x884C;&#x6570;&#x7801;&#x7BA1;&#x6D4B;&#x8BD5;&#x7A0B;&#x5e8F;\&#x7A0B;&#x5e8F;.c</file>
+      <file>$TOOLKIT_DIR$\inc\msp430g2553.h</file>
+      <file>$TOOLKIT_DIR$\inc\in430.h</file>
+      <file>$TOOLKIT_DIR$\lib\dlib\dl430fn.r43</file>
+      <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
+      <file>$PROJ_DIR$\..\595&#x6D4B;&#x8BD5;&#x7A0B;&#x5e8F;\main.c</file>
+      <file>$TOOLKIT_DIR$\inc\io430x14x.h</file>
+      <file>$TOOLKIT_DIR$\inc\io430.h</file>
+      <file>$PROJ_DIR$\..\..\..\&#x5355;&#x7247;&#x673A;MSP-430\MSP430G2xx\&#x7eC3;&#x4e60;G2\1 IO&#x4e2D;&#x65AD;&#x5904;&#x7406;\main.c</file>
+      <file>$TOOLKIT_DIR$\config\lnk430G2553.xcl</file>
+    </outputs>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 4</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Obj\pro.pbd</name>
+      <inputs>
+        <tool>
+          <name>BILINK</name>
+          <file> 3</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.c</name>
+      <outputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 0</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 3</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 7 8 10</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 7 8 10</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\pro.d43</name>
+      <inputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 15 0 9</file>
+        </tool>
+      </inputs>
+    </file>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs/>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>XLINK</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+

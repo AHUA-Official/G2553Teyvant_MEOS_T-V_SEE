@@ -1,0 +1,21 @@
+"-p" 
+
+"D:\IAR for msp430\430\config\debugger\msp430g2553.ddf" 
+
+"--iv_base" 
+
+"0xFFE0" 
+
+"--odd_word_check" 
+
+"-d" 
+
+"sim" 
+
+"--derivativeSim" 
+
+"MSP430G2xx3" 
+
+
+
+
