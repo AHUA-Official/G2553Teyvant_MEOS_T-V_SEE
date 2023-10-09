@@ -1,7 +1,7 @@
 #include <msp430.h> 
 int main(void)
 {
-    WDTCTL = WDTPW | WDTHOLD;	// 关闭看门狗
+    WDTCTL = WDTPW | WDTHOLD;	// 关闭看门狗定时器
     /*设置MCLK频率*/
     DCOCTL = CALDCO_8MHZ;
     BCSCTL1 = CALBC1_8MHZ;
