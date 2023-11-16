@@ -2,7 +2,7 @@ import serial
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
-portx = "COM3"
+portx = "COM4"
 bps = 9600
 timex = 5
 # 串口执行到这已经打开 再用open命令会报错
