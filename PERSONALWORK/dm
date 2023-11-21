@@ -1,0 +1,24 @@
+void vofa_ce_shi(int a,int b)
+{
+		int tt1,tt2;
+		uchar m;
+		tt1=a;
+		tt2=b;
+		//符号位的判断
+		m=Z_F_judge(temp[3]);
+		if(!m)
+			table1[3]=0x2d;//符号位
+		else
+			table1[3]=0x2b;
+		//用，隔开数据
+		table1[2]=',';//两个数据之间用，隔开
+		//温度数据
+		table1[4]=tt2/100+0x30;//温度十位
+		table1[5]=tt2%100/10+0x30;//温度个位
+		table1[6]=0x2e;//小数点'.'
+		table1[7]=tt2%100%10+0x30;//小数位
+		//FireWater的固定格式
+		table1[8]=0x0D;  //'/r'
+		table1[9]=0x0A;//'/n'
+		table1[10]='\0';
+}
