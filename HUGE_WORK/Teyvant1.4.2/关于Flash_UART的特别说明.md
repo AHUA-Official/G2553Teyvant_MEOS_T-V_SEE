@@ -60,10 +60,10 @@ void Flash_Init(void)
 "FWKEY--> 对FCTL1 FCTL2 FCTL3 写入许可"
 "FSSEL0+FN1 --> Flash Timing Generator 时钟源MCLK 分频1/3"
 
-"取值地址配置"
+#取值地址配置
 "初始化Flash_ptr指向Flash的0x1000"
 
-"循环遍历"
+#"循环遍历"
 "共64组数据,存储在flash存储器的后128位当中"
 "每次读两位的数据,左移移位合并"
 "地址向后移动两位"

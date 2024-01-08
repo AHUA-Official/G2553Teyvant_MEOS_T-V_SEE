@@ -1,0 +1,195 @@
+{
+  "main": {
+    "id": "2d2d4d846f856d1e",
+    "type": "split",
+    "children": [
+      {
+        "id": "7b4e78ea29cfe82f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0104cef88d710cd4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HUGE_WORK/Teyvant.1.1.0/ITEM/README.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d55b5ee8491d8040",
+    "type": "split",
+    "children": [
+      {
+        "id": "c58aafc1d07d83c8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6f541f3ae71b5b17",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "ceac290e02df5264",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "f78a81e0f5eab1ef",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "209c0bd3494ba87e",
+    "type": "split",
+    "children": [
+      {
+        "id": "4a067afa88fd76ec",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9e9203d0d4127550",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "HUGE_WORK/Teyvant.1.1.0/ITEM/README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "01d934ae4b371d13",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "HUGE_WORK/Teyvant.1.1.0/ITEM/README.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "760a657ee2556eac",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "c5cdcf41685180dc",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "HUGE_WORK/Teyvant.1.1.0/ITEM/README.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "0104cef88d710cd4",
+  "lastOpenFiles": [
+    "HUGE_WORK/Teyvant.1.1.0/ITEM/屏幕录制 2023-11-12 125637.mp4",
+    "HUGE_WORK/Teyvant.1.1.0/ITEM/2023-10-08 23-07-33.mkv",
+    "HUGE_WORK/Teyvant.1.1.0/ITEM/2023-10-08 22-54-20.mkv",
+    "HUGE_WORK/Teyvant.1.1.0/DAIRY/README.md",
+    "HUGE_WORK/Teyvant.1.1.0/ITEM/README.md",
+    "HUGE_WORK/Teyvant1.2.0/ITEM/pythonProject7/output.png",
+    "HUGE_WORK/Teyvant1.2.0/ITEM/pythonProject7/out.png",
+    "HUGE_WORK/Teyvant1.4.2/Teyvant1.4.2MODEsg.jpg",
+    "HUGE_WORK/Teyvant1.4.2/Screenshot_2023-11-26-21-43-57-666_com.taobao.tao.jpg",
+    "HUGE_WORK/Teyvant1.4.2/Screenshot_2023-11-26-21-33-52-179_com.taobao.tao.jpg",
+    "HUGE_WORK/Teyvant1.4.2/Screenshot_2023-11-26-21-32-57-786_com.taobao.tao.jpg",
+    "HUGE_WORK/Teyvant1.4.2/README.md",
+    "HUGE_WORK/Teyvant1.4.2/Pasted image 20231126214325.png",
+    "HUGE_WORK/Teyvant1.4.2/mmexport1701005820776.jpg",
+    "HUGE_WORK/Teyvant1.4.2/使用Matplotlib实现实时串口数据绘图：代码解释与文档.md",
+    "HUGE_WORK/Teyvant1.4.2/关于Flash_UART的特别说明.pdf",
+    "HUGE_WORK/Teyvant1.4.2/关于Flash_UART的特别说明.md",
+    "HUGE_WORK/Teyvant1.4.2/第三次会议.md",
+    "HUGE_WORK/Teyvant1.4.2/第二次会议.md",
+    "HUGE_WORK/Teyvant1.4.2/DAIRY/Teyvant_MEOS项目手册.md",
+    "HUGE_WORK/Teyvant1.4.2/DAIRY/Teyvant_MEOS项目上路00.md",
+    "HUGE_WORK/Teyvant1.4.2/DAIRY/Teyvant_MEOS项目上路04.md",
+    "HUGE_WORK/Teyvant1.4.2/DAIRY/Teyvant_MEOS项目上路03.md",
+    "HUGE_WORK/Teyvant1.4.2/DAIRY/Teyvant_MEOS项目上路01.md",
+    "HUGE_WORK/Teyvant1.4.2/DAIRY/README.md",
+    "PERSONALWORK/在全世界种满香菜/PERSONAL__LEARN/README.md",
+    "PERSONALWORK/在全世界种满香菜/PERSONAL__LEARN/MSP430G2553单片机学习历程.md",
+    "README.md",
+    "第三次会议.md",
+    "第二次会议.md",
+    "HUGE_WORK/Teyvant1.4.2/ITEM/pythonProject7.zip",
+    "HUGE_WORK/Teyvant1.4.2/ITEM/searial1.zip",
+    "HUGE_WORK/Teyvant1.4.2/ITEM/G2_ADC_Flash_Uart(1).zip",
+    "HUGE_WORK/Teyvant1.2.0/ITEM/README.md",
+    "HUGE_WORK/Teyvant1.2.0/例程代码讲解2.md",
+    "HUGE_WORK/Teyvant1.2.0/README.md",
+    "HUGE_WORK/Teyvant.1.1.0/第二次会议.md",
+    "HUGE_WORK/Teyvant.1.1.0/Meeting/README.md",
+    "GOOD__DEPENDS_REPO/goodhearted--EXAMPLE ---and--ITEM/README.md",
+    "HUGE_WORK/Teyvant1.4.2/~$772组综合设计期末汇报答辩.pptx",
+    "GOOD__DEPENDS_REPO/goodhearted--EXAMPLE ---and--ITEM/北航书/AY-G2PL KIT_用户手册.pdf",
+    "GOOD__DEPENDS_REPO/goodhearted--EXAMPLE ---and--ITEM/北航书/AY-G2PL Module_原理图.pdf",
+    "GOOD__DEPENDS_REPO/Common_Modules/README.md"
+  ]
+}
